@@ -1,5 +1,30 @@
 # Demo films
 
+## The capability reel
+
+[**EditVideo Agent in 89 seconds**](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4) (1080p, 51 MB, on the release page; [720p preview](editvideo-reel-720p.mp4),
+[poster](editvideo-reel.jpg)) shows the tools at work:
+each chapter puts on screen what a tool did, full frame, before and after. The footage is real and credited
+([full credits](editvideo-reel-CREDITS.md)). The tool names on screen are the MCP tools that made each picture.
+
+| Chapter | What you see | MCP tools |
+|---|---|---|
+| Opening | A Blender terrain flight over the Điện Biên Phủ valley | `render_3d` |
+| 01 Sees and follows a subject | A rally car found, then masked in every frame; the rest of the frame darkens around it and a label rides it. Then the lit source beside the 9:16 cut that keeps the car centred. | `find_subjects`, `track_subject` (SAM 2), `edit_subject` (spotlight, reframe) |
+| 02 Cuts to the music | A rally montage whose cuts were moved onto the beats of the music you hear, with a 0.3x speed ramp on the drift. Underneath, a strip shows the beats the snap aimed at and where each cut landed. | `music_structure`, `snap_cuts_to_beats`, `retime_footage` |
+| 03 Explains with 3D and motion graphics | A Three.js scene pulls back from the Earth to the Moon at true scale. A dimension line counts to 384,400 km, a row of about 30 Earths fills the gap, and light crosses it in 1.28 s. | `compose_scene3d`, `compose_explainer` |
+| 04 Renders 3D, headless | A glTF model lit from the dark, then a Blender bloc map | `compose_product`, `render_3d` |
+| 05 Grades colour | A drone shot as delivered and after `process_color`, with a divider sweeping across | `process_color` |
+| 06 Builds history from the archive | Archive film inside the land it was shot in; the story's own documents shot close | `compose_cinematic` (`map_matte`, `dossier`) |
+| 07 Checks its own work | Legal levels, flashes, banding, text contrast, loudness and the licence ledger (each work counted once, the works inside the nested films included), measured on the reel's own render | `motion_audit` (`gates=true`), `audit_audio`, `project_credits` |
+
+The 1080p file is the master re-encoded at 4.5 Mbps; the 720p preview in this folder is 1.25 Mbps, small enough to
+keep in the repository, and visibly softer. Its own captions are in English; the archive films it plays in chapter
+06 keep their Vietnamese map labels and captions. The script that lays it out reads local renders and stays with the
+private production files. The MCP calls it makes are the ones named above.
+
+## The archive films
+
 Three short archive films that EditVideo Agent built end to end from public-domain material. An AI composed each one
 through the MCP recipes, then rendered it with Remotion and checked it with the delivery gates and the licence
 ledger. The files here are 720p previews of the 1080p renders. Captions are in

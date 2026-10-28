@@ -65,7 +65,7 @@ Engine setup pinned three0.186.1,@remotion/three4.0.534,@react-three/fiber9.5.0.
 
 Bằng chứng thực trong outputs/color-live-verification.json,depth-live-observation.json,scene3d-live-verification.json và advanced-narrated-demo.json. Script verify_color_depth_3d.py tạo radiancefixture20/100/400/1000nit thành PQ10bit, kiểmdecode/scopes; scene3D được render hai engine và nhìnpixels. Demo thuyết minh được dựng mới từtiming TTS thật; video cuối là SDR, có HDR sample tonemap được ghi rõ nguồn kỹ thuật.
 
-## Color graph scene-referred (round 6)
+## Color graph scene-referred
 
 `process_color` nhận `graph` thay cho `grade`: input transform (log máy quay hoặc BT.1886 của footage hiển thị) →
 scene-linear Rec.709 → các node grade trong ACEScct (`exposure` theo stop, `white_balance`, `cdl` slope/offset/power/sat,

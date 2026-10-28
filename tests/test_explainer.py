@@ -223,3 +223,16 @@ def test_log_zoom_dive_approaches_steadily_and_doc_recipes(timeline):
     assert [e["id"] for e in els if e["type"] == "circle"] == ["t0", "t1", "t2"] and any(e.get("ripple") for e in els)
     for op in tc["ops"] + mp["ops"]:
         Layer.model_validate(op["layer"])
+
+
+def test_unit_grid_says_when_its_height_shrinks_the_row(timeline):
+    """A row of 30 laid across a gap measures it only when it fills the gap: in a box too short for its cells and its
+    bracket label it is centred at a third of the width (the reel's '30 Earths' row read as 90)."""
+    req = {"recipe": "unit_grid", "id": "row", "start_frame": 0, "end_frame": 120, "rows": 1, "cols": 30, "dot": .5,
+           "box": [.1, .47, .8, .06], "brackets": [{"cols": [0, 29], "label": "30 fit between them", "at": 40}], "label_size": 26}
+    short = explainer.unit_grid(timeline, explainer.UnitGrid.model_validate(req))
+    assert short["measurements"]["fill"][0] < .5 and any("make the box" in n for n in short["notes"])
+    need = float(next(n for n in short["notes"] if "make the box" in n).split("make the box ")[1].split(" tall")[0])
+    tall = explainer.unit_grid(timeline, explainer.UnitGrid.model_validate({**req, "box": [.1, .47, .8, need + .002]}))
+    assert tall["measurements"]["fill"][0] > .99 and not any("spans" in n for n in tall["notes"])
+    assert abs(tall["measurements"]["cell_px"] - .8 * timeline["width"] / 30) < 1

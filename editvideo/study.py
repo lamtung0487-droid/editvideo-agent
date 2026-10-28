@@ -510,9 +510,21 @@ def event_profile(path, start=0.0, end=None, sample_fps=10, width=480):
         nblk = blk[i] if i < len(blk) else 0.0
         if nxt < .5 * mad[i - 1] or nblk < .5 * blk[i - 1]:
             cand.append(i)
-    orb = cv2.ORB_create(1500)
+    # Soft frames (480 px, defocus, a punch's upscale) give ORB ~20 corners at its default threshold of 20: too few for a
+    # stable inlier share (FFmpeg 6.1, 7.1 and 8.1 encodes of one test clip fell on both sides of the cut-off). 10 gives
+    # ~130; the extra corners also let RANSAC fit a "rescale" between two unrelated shots, so the pixels confirm it.
+    orb = cv2.ORB_create(1500, fastThreshold=10)
     bf = cv2.BFMatcher(cv2.NORM_HAMMING)
     events = []
+
+    def moves_onto(a, b, M):
+        """Does a, moved by M, reproduce b? A rescale leaves little difference; a cut leaves most of it."""
+        h, w = a.shape
+        valid = cv2.warpAffine(np.full_like(a, 255), M, (w, h), flags=cv2.INTER_NEAREST) > 0
+        if valid.mean() < .3:  # a punch out to 0.7 covers 49 % of the frame
+            return False
+        before = np.abs(b.astype(np.int16) - a)[valid].mean()
+        return np.abs(b.astype(np.int16) - cv2.warpAffine(a, M, (w, h)))[valid].mean() < .5 * before
 
     def scale_match(a, b):
         """Same picture rescaled between a and b? → (scale, fixed point) or None (ORB + partial affine, RANSAC)."""
@@ -526,11 +538,11 @@ def event_profile(path, start=0.0, end=None, sample_fps=10, width=480):
         pa = np.float32([ka[x.queryIdx].pt for x in m])
         pb = np.float32([kb[x.trainIdx].pt for x in m])
         M, inl = cv2.estimateAffinePartial2D(pa, pb, method=cv2.RANSAC, ransacReprojThreshold=2.5)
-        if M is None or inl is None or inl.sum() < 8 or inl.mean() <= .5:
+        if M is None or inl is None or inl.sum() < 8:
             return None, False
         sc = float(np.hypot(M[0, 0], M[1, 0]))
         out = ~inl.ravel().astype(bool)
-        if abs(sc - 1) <= .03 and out.sum() >= 20:
+        if abs(sc - 1) <= .03 and inl.mean() > .5 and out.sum() >= 20:
             # Held overlays (titles, labels) match as an identity; the picture behind them may still be rescaled.
             M2, inl2 = cv2.estimateAffinePartial2D(pa[out], pb[out], method=cv2.RANSAC, ransacReprojThreshold=2.5)
             if M2 is not None and inl2 is not None and inl2.sum() >= 12 and inl2.mean() > .3:
@@ -538,7 +550,9 @@ def event_profile(path, start=0.0, end=None, sample_fps=10, width=480):
                 if .7 < sc2 < 1.5 and abs(sc2 - 1) > .03:
                     M, sc = M2, sc2
         if not (.7 < sc < 1.5 and abs(sc - 1) > .03):
-            return None, True  # same picture, not rescaled
+            return None, bool(inl.mean() > .5)  # same picture, not rescaled (or no shared structure)
+        if not moves_onto(a, b, M):  # the corners propose a rescale; the pixels confirm it
+            return None, False
         try:
             fx, fy = np.linalg.solve(np.eye(2) - M[:, :2], M[:, 2])
         except np.linalg.LinAlgError:

@@ -68,6 +68,16 @@ def folder(project_id):
     return p
 
 
+def engine_temp():
+    """A fresh, short temp folder for one render engine run (its TEMP/TMP). Chrome's profile adds ~100 characters below
+    it: under projects/<id>/jobs/<id>/engine-temp a profile file reached 197 characters inside the store, past Windows'
+    260-character limit for a store ~60 characters deep, where Python (without long-path support) can neither write
+    nor clean up. Here it stays ~110 characters below the store."""
+    import tempfile
+    (DATA / "tmp").mkdir(parents=True, exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="e", dir=DATA / "tmp"))
+
+
 def read_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
 

@@ -39,8 +39,15 @@ ffmpeg -version
 git --version
 ```
 
-Expect Python 3.11 or newer, Node 22 or newer, any FFmpeg 6 or 7. If PowerShell refuses to run scripts, allow local
-scripts for your user once:
+Expect Python 3.11 or newer, Node 22 or newer and FFmpeg 6.1 or newer (the tests pass with 6.1, 7.1 and 8.1). The
+banding check of the delivery report needs an FFmpeg built with libvmaf: the gyan.dev builds that winget installs and
+Homebrew's have it; Ubuntu's and Debian's packages do not, and the report then lists banding as `unmeasured`.
+
+Keep the clone's path under ~100 characters (for example `C:\src\editvideo-agent`): installed files reach ~155
+characters below it, and Windows refuses paths over 260 characters unless long paths are enabled. `setup.ps1` checks
+this before it installs anything.
+
+If PowerShell refuses to run scripts, allow local scripts for your user once:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
@@ -53,6 +60,9 @@ sudo apt-get update
 sudo apt-get install -y python3 python3-venv ffmpeg git   # Python 3.11 or newer
 # Node.js 22 from nodesource or nvm
 ```
+
+The apt FFmpeg has no libvmaf, so banding is reported as `unmeasured`. To measure it, put a static build with
+libvmaf first on `PATH`. Check a build with `ffmpeg -hide_banner -filters | grep libvmaf`.
 
 ### macOS (untested)
 
@@ -230,6 +240,8 @@ A session starts with `editvideo_bootstrap(task)`, then `editvideo_discover_tool
 | Symptom | Cause and fix |
 |---|---|
 | `ffmpeg` not found | Reopen the shell after installing; check `ffmpeg -version`; add FFmpeg's `bin` folder to `PATH`. |
+| `setup.ps1` stops because the folder's path is too long, or pip/npm fail with `No such file or directory` on a long path | Windows' 260-character limit. Clone into a short path such as `C:\src\editvideo-agent`, or enable long paths once from an administrator PowerShell: `New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name LongPathsEnabled -Value 1 -PropertyType DWORD -Force`, then `git config --global core.longpaths true`. |
+| The delivery report lists `"unmeasured": ["banding"]` | This FFmpeg has no libvmaf (Ubuntu's and Debian's packages). Everything else is measured; install a build with libvmaf to measure banding. |
 | `npm ci` fails | Node older than 22, or a proxy; check `node --version`; set `HTTPS_PROXY`. |
 | A render stalls on "Downloading Chrome Headless Shell" | Setup fetches it once; if that was interrupted, run `node --input-type=module -e "const r = await import('@remotion/renderer'); await r.ensureBrowser()"` in `engines/`. |
 | pip `ReadTimeoutError` | A slow mirror; the scripts already retry. Rerun `setup.ps1`, which keeps what was installed. |

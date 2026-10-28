@@ -8,6 +8,17 @@ hay HyperFrames, rồi *kiểm* kết quả bằng phép đo và lặp lại.
 thẩm mỹ; runtime thực thi xác định và trả về bằng chứng (frame, crop, âm thanh, con số). Không có điểm "đẹp" ẩn, không
 có cổng duyệt. English: [README.md](README.md).
 
+## Bắt đầu từ đây
+
+- **Dùng thử:** [INSTALL.vi.md](INSTALL.vi.md), rồi `python scripts/demo.py --render`, rồi đọc
+  [docs/SPEC.md](docs/SPEC.md) để biết hệ thống gồm những phần nào.
+- **Từ một AI host:** không cần nạp schema của 137 tool hay đọc hết tài liệu. `editvideo_bootstrap(task)` trả về vài
+  tool và một hướng dẫn mà việc đó cần; `editvideo_discover_tools(query, include_schema=true)` trả schema chính xác khi
+  cần; `EDITVIDEO_TOOLSET=compact` chỉ mở 7 tool đầu vào cho host có ngữ cảnh nhỏ.
+- **Tìm hướng dẫn:** [docs/README.md](docs/README.md) xếp các hướng dẫn theo việc cần làm. Những tên như "round 6"
+  trong vài trang cũ và tên file test ghi lại quá trình xây dựng; không cần đọc chúng.
+- **Đóng góp:** [CONTRIBUTING.md](CONTRIBUTING.md).
+
 **v0.8.0 cùng nâng cấp chưa phát hành:** 137 tool MCP · 95 hiệu ứng chạy được (mỗi hiệu ứng có dải xem trước/sau ở cả hai engine) + 7 combo đã
 kiểm · 18 loại layer · 17 recipe explainer + 4 recipe tiêu đề · 16 họ font đủ dấu tiếng Việt · 24 bảng màu ·
 16 style kit · 7 LUT gốc cùng color graph scene-referred.
@@ -44,8 +55,15 @@ gói ảnh chỉ kèm evidence id. `EDITVIDEO_TOOLSET=compact` chỉ mở 7 tool
 
 ## Phim demo
 
-Ba phim tư liệu ngắn do hệ thống tự dựng từ đầu đến cuối bằng tư liệu công cộng (bản xem trước 720p; credit ở
-[docs/demo](docs/demo/README.md)):
+[![EditVideo Agent trong 89 giây](docs/demo/editvideo-reel.jpg)](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)
+
+**[EditVideo Agent trong 89 giây](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)** (1080p, 51 MB, tải từ trang Release; bản
+[xem nhanh 720p](docs/demo/editvideo-reel-720p.mp4) nằm trong repo): các công cụ làm việc trên toàn khung hình.
+Hệ thống tìm và bám theo một vật thể, cắt theo nhạc, giải thích bằng 3D và đồ họa chuyển động, render 3D, chỉnh màu,
+dựng lịch sử từ tư liệu lưu trữ và tự kiểm tra sản phẩm. Mỗi chương ghi tên tool MCP đã làm ra nó; footage là tư liệu
+thật, có ghi nguồn. Chi tiết từng chương: [docs/demo](docs/demo/README.md).
+
+Ba phim tư liệu ngắn do hệ thống tự dựng từ đầu đến cuối bằng tư liệu công cộng (bản xem trước 720p):
 
 | [![Leo thang](docs/demo/leo-thang.jpg)](docs/demo/leo-thang-720p.mp4) | [![Lan rộng](docs/demo/lan-rong.jpg)](docs/demo/lan-rong-720p.mp4) | [![Vịnh Bắc Bộ](docs/demo/vinh-bac-bo.jpg)](docs/demo/vinh-bac-bo-720p.mp4) |
 |---|---|---|

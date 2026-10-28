@@ -342,7 +342,7 @@ def map_matte(t, q: MapMatte, pid=None):
     by_region = {}
     for p in plays:
         by_region.setdefault(p["k"], []).append(p)
-    shown = []
+    shown, small = [], []  # small: footage shown in a region too narrow to read it
     for k, ps in by_region.items():
         s, r = shapes[k], shapes[k]["r"]
         col = q.sides[r.side]
@@ -370,6 +370,7 @@ def map_matte(t, q: MapMatte, pid=None):
                 continue
             if rx1 - rx0 < .2:
                 notes.append(f"region {r.name} is {rx1 - rx0:.2f} of the frame wide: its footage reads as texture; frame it closer or pick the part to show (focus)")
+                small.append({"region": r.name, "asset_id": f.asset_id, "width": round(rx1 - rx0, 3), "seconds": [round(a / FPS, 2), round(b / FPS, 2)]})
             # the clip at its own proportions, covering the region, its `focus` placed on the region's middle: the region
             # shows the part of the picture the caller chose, not whatever a centred crop leaves
             asset = None
@@ -515,7 +516,7 @@ def map_matte(t, q: MapMatte, pid=None):
             "sound_plan": sound,
             "measurements": {"cuts": 0, "regions": len(shapes), "footage": len(sound["footage"]), "events": len(ev), "kept": kept_n,
                              "drain_s": round((N - D) / FPS, 2), "end_zoom": round(end[0], 3), "clock": [marks[0][1], marks[-1][1]],
-                             "longest_empty_s": round(gap / FPS, 1)},
+                             "longest_empty_s": round(gap / FPS, 1), "footage_as_texture": small},
             "verify": "snapshot each reveal (footage only inside its region, its colour coded), the clock, the drain with its kept points; "
                       "play it: one camera move, no cut; run form_arc(video, plan, 'map_matte') (its footage contrast too)."}
 

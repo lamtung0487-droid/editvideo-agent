@@ -79,7 +79,7 @@ as one shot with no findings.
 - Prefer one call that does the geometry over many calls that place values.
 - Add a test that pins the contract (fields present, size bound where it matters).
 
-## Round 6 additions
+## Lean evidence and a clean protocol edge
 
 - Evidence packets (`inspect_window`, `crop_detail`, previews) send images as image blocks and keep only evidence ids,
   timestamps and sizes in the text; the director guide lives in the prompts, not in every result.

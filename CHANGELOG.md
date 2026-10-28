@@ -1,6 +1,37 @@
 # Changelog
 
-## Unreleased: the first public snapshot (2026-10-28)
+## Unreleased: fixes from the first community review (2026-10-28)
+
+- FFmpeg:
+  - The edit-event profile no longer mistakes a punch-in for a cut on FFmpeg 7.1. It finds more corners on soft
+    frames, and the pixels must confirm a rescale.
+  - Banding needs an FFmpeg with libvmaf. Ubuntu's and Debian's packages lack it; the delivery report now lists
+    banding as `unmeasured` instead of failing.
+  - On FFmpeg 7.1, slow-motion and deduped proxies no longer come out short: 7.1's MP4 muxer discards frames off a
+    regular grid, so they now end on `fps=30`.
+  - Under the MCP server, FFmpeg and other child processes no longer inherit the protocol's stdin. FFmpeg 6.1 read
+    from it and hung `read_audio_events`.
+  - Tested with FFmpeg 6.1, 7.1 and 8.1.
+- Windows PowerShell 5.1:
+  - `setup.ps1` no longer stops at pip's or npm's first stderr line when its output is redirected.
+  - `.mcp.json` is written without a byte-order mark.
+  - `start.ps1` parses on 5.1.
+- Windows paths: `setup.ps1` stops early, with the fix, on a clone path too long for the 260-character limit. Render
+  engines keep their browser profiles in a short temp folder.
+- Docs: a documentation map by task ([docs/README.md](docs/README.md)) and a "Start here" path in the README.
+- Demo: [EditVideo Agent in 89 seconds](docs/demo/README.md) (1080p on the `demo-reel-v2` release), the tools at
+  work full frame, each chapter made by the MCP tools it names; chapter 07 shows the delivery gates measured on the
+  reel itself.
+- `motion_audit(gates=true)` runs the delivery gates over MCP.
+- The text-contrast checks read translucent layers through their opacity, and read previews at their own size.
+- The licence ledger counts works, not files: a render of another project carries that project's works
+  (`ledger.register_project_render`), and `project_ledger` returns `works` and `work_count`. `project_credits`
+  credits each work in the part of a render that is used.
+- `snap_cuts_to_beats` reads the whole track's beat grid (the one `music_structure` returns) and returns its targets.
+- `unit_grid` notes when its row does not fill its box; `audit_timeline` flags an SVG whose view box has another shape
+  than its box; `map_matte` reports footage shown too small to read.
+
+## The first public snapshot (2026-10-28)
 
 EditVideo Agent gives an AI model senses, hands and composition skills for video, through MCP. This is the first
 public snapshot; earlier development happened in a private repository.

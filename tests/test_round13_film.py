@@ -45,9 +45,10 @@ def test_frame_grid_finds_and_rebuild_cfr_repairs_irregular_timestamps(tmp_path)
     """A clip whose frames 20.. sit one frame late (a gap) is found by frame_grid and put back on the 1/30 s grid by
     rebuild_cfr with every frame kept, in order."""
     src = tmp_path / "gap.mp4"
+    # no edit list: FFmpeg 7.1's ends where the frame durations add up, which hides the frame the gap pushed past it
     media.command([media.FFMPEG, "-y", "-v", "error", "-f", "lavfi", "-i", "testsrc2=size=160x90:rate=30:duration=2", "-vf",
                    "settb=1/15360,setpts=(N+gte(N\\,20))*512", "-fps_mode", "passthrough", "-video_track_timescale", "15360",
-                   "-c:v", "libx264", "-pix_fmt", "yuv420p", src])
+                   "-c:v", "libx264", "-bf", "0", "-use_editlist", "0", "-pix_fmt", "yuv420p", src])
     g = media.frame_grid(src, 30)
     assert g["frames"] == 60 and g["irregular_count"] == 1 and g["irregular"][0][0] == 20
     fixed = media.rebuild_cfr(src, 30)

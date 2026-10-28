@@ -549,6 +549,8 @@ def cadence_proxy(path, asset, s0, frames, max_width=None, rate=1.0, dedupe=Fals
         f"trim=start={a - .25 / F:.6f}", *(["setpts=PTS-STARTPTS"] if rate == 1 else [f"setpts=(PTS-STARTPTS)/{rate:.6f}", "fps=30"])]
     if dedupe:  # a still tail is all repeats: mpdecimate drops it and the interpolation stops at the last moving frame
         vf.append("tpad=stop_mode=clone:stop_duration=4")
+    if vf[-1] != "fps=30":  # FFmpeg 7.1's MP4 muxer marks frames off a regular grid as discarded (15 of 60, 39 of 40 written)
+        vf.append("fps=30")
     try:
         command([FFMPEG, "-y", "-v", "error", "-ss", f"{max(0.0, s0 - 1.0):.6f}", "-copyts", "-i", str(path), "-vf", ",".join(vf),
                  "-frames:v", str(frames), "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-g", "30", "-pix_fmt", "yuv420p",
@@ -850,7 +852,7 @@ def render(pid, timeline, config, work, quality, cancelled, progress):
                 # HyperFrames loads every extracted video frame before its player is ready: ~0.09 s a frame measured (1
                 # shot of 288 frames 36 s, 5 shots 62 s), so a 128 s film cut from video needs minutes, not the default 45 s
                 "--player-ready-timeout",str(min(1800000,60000+150*sum(s.end_frame-s.start_frame for s in timeline.shots if s.asset_id)+2000*len(timeline.layers or [])))]
-    render_temp=work/'engine-temp';render_temp.mkdir(exist_ok=True)
+    render_temp=store.engine_temp()  # short: the browser profile below it stays under Windows' 260-character limit
     env={**engine_env(pid),'TEMP':str(render_temp),'TMP':str(render_temp)}
     if engine=="hyperframes":
         # HyperFrames' Node heap grows with the frames captured (a 29 s 1096x1920 reel from a 1080p VP9 take ran out

@@ -332,9 +332,20 @@ def unit_grid(t, q: UnitGrid):
     notes = []
     if r * 2 < _px(t, 6):
         notes.append(f"Dots are {r * 2:.1f}px wide; under ~6px they shimmer when the frame scales. Use fewer cells or a larger box.")
+    fill_w, fill_h = cell * q.cols / bw, cell * q.rows / max(1e-6, bh - label_room)
+    if fill_w < .8:
+        # a row laid against a span (n units fit between two bodies) measures it only when it fills the span: the height bound
+        # it, and it was centred in its box at a fraction of the width it claims
+        need = (bw / q.cols * q.rows + label_room) / H
+        notes.append(f"The grid spans {fill_w:.0%} of its box's width: its cells are bound by the height ({bh - label_room:.0f}px "
+                     f"after {label_room:.0f}px of bracket labels). For the row to measure the box's width, make the box {need:.3f} tall.")
+    elif fill_h < .8:
+        notes.append(f"The grid spans {fill_h:.0%} of its box's height: its cells are bound by the width.")
     return {"ops": [{"op": "upsert_layer", "layer": layer}], "notes": notes,
             "inspect_frames": [q.start_frame + q.appear_frames + 8, q.start_frame + max([q.highlight_at + 12] + [b.at + 14 for b in q.bands])],
-            "measurements": {"dots": q.rows * q.cols, "dot_px": round(r * 2, 1), "highlighted": len(marks), "elements": len(els)}}
+            "measurements": {"dots": q.rows * q.cols, "dot_px": round(r * 2, 1), "cell_px": round(cell, 1),
+                             "grid_px": [round(cell * q.cols), round(cell * q.rows)], "fill": [round(fill_w, 3), round(fill_h, 3)],
+                             "highlighted": len(marks), "elements": len(els)}}
 
 
 # ---------------------------------------------------------------- plot

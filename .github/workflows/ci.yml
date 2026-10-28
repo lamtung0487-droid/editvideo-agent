@@ -32,3 +32,29 @@ jobs:
           node --input-type=module -e "const r = await import('@remotion/renderer'); await r.ensureBrowser()"
       - name: Test
         run: python -m pytest -q
+
+  setup-windows-powershell-5:
+    # setup.ps1 as people and AI agents run it: Windows PowerShell 5.1 with the output redirected, which once stopped it
+    # at pip's first stderr line
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: setup.ps1, output redirected
+        shell: powershell
+        run: |
+          ./setup.ps1 2>&1 | Tee-Object -FilePath setup.log
+          if (-not (Test-Path .venv\Scripts\python.exe)) { throw 'setup.ps1 did not finish' }
+      - name: .mcp.json reads as JSON and start.ps1 parses
+        shell: powershell
+        run: |
+          .venv\Scripts\python.exe -c "import json; json.load(open('.mcp.json', encoding='utf-8'))"
+          if ($LASTEXITCODE -ne 0) { throw '.mcp.json is not plain UTF-8 JSON' }
+          $errors = $null
+          [void][System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path start.ps1).Path, [ref]$null, [ref]$errors)
+          if ($errors) { throw ($errors -join '; ') }

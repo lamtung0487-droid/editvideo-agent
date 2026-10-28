@@ -33,7 +33,7 @@ def snapshot(pid,engine,frames,timeline_variant=None):
     ensure_free(store.DATA, 1.0)
     work=store.DATA/"observations"/str(uuid.uuid4())
     work.mkdir(parents=True)
-    render_temp=work/'engine-temp';render_temp.mkdir(exist_ok=True)
+    render_temp=store.engine_temp()  # short: the browser profile below it stays under Windows' 260-character limit
     render_env={**engine_env(pid),'TEMP':str(render_temp),'TMP':str(render_temp)}
     copied=work/"source"
     with store.connection() as db:

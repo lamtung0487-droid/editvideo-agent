@@ -288,45 +288,70 @@ def _plate_contrast(l, t, asset, design, W, H):
     pics = [x for x in t.get("layers") or [] if x.get("kind") in ("video", "image") and x["start_frame"] <= f < x["end_frame"] and x.get("z", 0) < l.get("z", 0)]
     if card and all(c.get("z", 0) > max([p.get("z", 0) for p in pics] or [-1]) for c in card[-1:]):
         return round(_wcag_ratio(tc, _hex_rgb(max(card, key=lambda x: x.get("z", 0))["color"])), 2)
-    under = [x for x in t.get("layers") or [] if x.get("kind") in ("video", "image") and x["start_frame"] <= f < x["end_frame"]
-             and x.get("width", 0) * x.get("height", 0) > .5 and x.get("z", 0) < l.get("z", 0)]
-    item = under[-1] if under else next((x for x in t["shots"] if x["start_frame"] <= f < x["end_frame"]), None)
-    a = asset(item.get("asset_id")) if item else None
-    if not a or a.get("kind") not in ("video", "image") or not a.get("width") or not a.get("path"):
+    # The backdrop is the highest OPAQUE picture under the text (or the shot); translucent pictures and flat shapes above it
+    # are veils blended in by their opacity. A 26 % blurred wash over a dark slate had been read as the full-brightness wash
+    # (titles of the capability reel at 1.1:1 that rendered at 12:1).
+    opacity = lambda x: float(x.get("opacity", 1) if x.get("opacity") is not None else 1)
+    under = sorted((x for x in t.get("layers") or [] if x.get("kind") in ("video", "image") and x["start_frame"] <= f < x["end_frame"]
+                    and x.get("width", 0) * x.get("height", 0) > .5 and x.get("z", 0) < l.get("z", 0)), key=lambda x: x.get("z", 0))
+    opaque = [x for x in under if opacity(x) >= .95]
+    item = opaque[-1] if opaque else next((x for x in t["shots"] if x["start_frame"] <= f < x["end_frame"]), None)
+    floor = item.get("z", 0) if opaque else -1
+    veils = [x for x in under if opacity(x) < .95 and x.get("z", 0) > floor]
+    veils += [x for x in t.get("layers") or [] if x.get("kind") == "shape" and x["start_frame"] <= f < x["end_frame"] and floor < x.get("z", 0) < l.get("z", 0)
+              and .02 <= opacity(x) < .95 and str(x.get("blend") or "normal") == "normal" and _hex_rgb(x.get("color"))
+              and x.get("x", 0) <= lx <= x.get("x", 0) + x.get("width", 0) and x.get("y", 0) <= ly <= x.get("y", 0) + x.get("height", 0)]
+
+    def crop_of(item):
+        """The text box's pixels in item's source frame, through its fit, focus and held punch-ins."""
+        a = asset(item.get("asset_id")) if item else None
+        if not a or a.get("kind") not in ("video", "image") or not a.get("width") or not a.get("path"):
+            return None
+        try:
+            if a["kind"] == "video":
+                st = item.get("source_start", 0) + (0 if item.get("freeze") else (f - item["start_frame"]) * item.get("playback_rate", 1) / FPS)
+                img = _source_frame(str(a["path"]), round(min(st, max(0.0, (a.get("duration") or 1e9) - .1)), 1))
+            else:
+                from PIL import Image
+                img = np.asarray(Image.open(a["path"]).convert("RGB").resize((480, max(1, round(480 * a["height"] / a["width"])))))
+        except Exception:
+            return None
+        if img is None:
+            return None
+        sw, sh = a["width"], a["height"]
+        bw_, bh_ = (W, H) if item in t["shots"] else (item["width"] * W, item["height"] * H)
+        k = max(bw_ / sw, bh_ / sh) if item.get("fit", "cover") == "cover" else min(bw_ / sw, bh_ / sh)
+        ox = (0 if item in t["shots"] else item["x"] * W) + (bw_ - sw * k) * item.get("focus_x", .5)
+        oy = (0 if item in t["shots"] else item["y"] * H) + (bh_ - sh * k) * item.get("focus_y", .5)
+        g = img.shape[1] / sw  # grabbed pixels per source pixel
+        # held punch-ins (focus_zoom cut) scale the element about their origin: canvas X shows element point o + (X - o) / z
+        ex, ey = (0, 0) if item in t["shots"] else (item["x"] * W, item["y"] * H)
+        zs = [((e.get("params") or {}).get("amount", .08), (e.get("params") or {}).get("focus_x", .5), (e.get("params") or {}).get("focus_y", .5))
+              for e in item.get("effects") or [] if e.get("name") == "focus_zoom" and (e.get("params") or {}).get("cut")
+              and e.get("start_frame", 0) <= f - item["start_frame"]]
+        unzoom = lambda v, o, n: v if not zs else o * n + (v - o * n) / (1 + float(zs[-1][0]))
+        x0, x1 = [int((ex + unzoom(v - ex, zs[-1][1] if zs else .5, bw_) - ox) / k * g) for v in (l["x"] * W, (l["x"] + l["width"]) * W)]
+        y0, y1 = [int((ey + unzoom(v - ey, zs[-1][2] if zs else .5, bh_) - oy) / k * g) for v in (l["y"] * H, (l["y"] + l["height"]) * H)]
+        crop = img[max(0, y0):max(0, y1), max(0, x0):max(0, x1)].reshape(-1, 3).astype(np.float32)
+        # the part of the box beyond the picture (a contained or scaled-down frame) shows the canvas background
+        outside = max(1, (x1 - x0) * (y1 - y0)) - len(crop)
+        bg = _hex_rgb((design or {}).get("background") or "#102322") if item in t["shots"] else None
+        if bg and outside > .25 * max(1, (x1 - x0) * (y1 - y0)):
+            crop = np.concatenate([crop, np.tile(np.array(bg, np.float32), (min(outside, 4000), 1))])
+        return crop
+
+    crop = crop_of(item)
+    if crop is None or len(crop) < 20:
         return None
-    try:
-        if a["kind"] == "video":
-            st = item.get("source_start", 0) + (0 if item.get("freeze") else (f - item["start_frame"]) * item.get("playback_rate", 1) / FPS)
-            img = _source_frame(str(a["path"]), round(min(st, max(0.0, (a.get("duration") or 1e9) - .1)), 1))
-        else:
-            from PIL import Image
-            img = np.asarray(Image.open(a["path"]).convert("RGB").resize((480, max(1, round(480 * a["height"] / a["width"])))))
-    except Exception:
-        return None
-    if img is None:
-        return None
-    sw, sh = a["width"], a["height"]
-    bw_, bh_ = (W, H) if item in t["shots"] else (item["width"] * W, item["height"] * H)
-    k = max(bw_ / sw, bh_ / sh) if item.get("fit", "cover") == "cover" else min(bw_ / sw, bh_ / sh)
-    ox = (0 if item in t["shots"] else item["x"] * W) + (bw_ - sw * k) * item.get("focus_x", .5)
-    oy = (0 if item in t["shots"] else item["y"] * H) + (bh_ - sh * k) * item.get("focus_y", .5)
-    g = img.shape[1] / sw  # grabbed pixels per source pixel
-    # held punch-ins (focus_zoom cut) scale the element about their origin: canvas X shows element point o + (X - o) / z
-    ex, ey = (0, 0) if item in t["shots"] else (item["x"] * W, item["y"] * H)
-    zs = [((e.get("params") or {}).get("amount", .08), (e.get("params") or {}).get("focus_x", .5), (e.get("params") or {}).get("focus_y", .5))
-          for e in item.get("effects") or [] if e.get("name") == "focus_zoom" and (e.get("params") or {}).get("cut")
-          and e.get("start_frame", 0) <= f - item["start_frame"]]
-    unzoom = lambda v, o, n: v if not zs else o * n + (v - o * n) / (1 + float(zs[-1][0]))
-    x0, x1 = [int((ex + unzoom(v - ex, zs[-1][1] if zs else .5, bw_) - ox) / k * g) for v in (l["x"] * W, (l["x"] + l["width"]) * W)]
-    y0, y1 = [int((ey + unzoom(v - ey, zs[-1][2] if zs else .5, bh_) - oy) / k * g) for v in (l["y"] * H, (l["y"] + l["height"]) * H)]
-    crop = img[max(0, y0):max(0, y1), max(0, x0):max(0, x1)].reshape(-1, 3).astype(np.float32)
-    # the part of the box beyond the picture (a contained or scaled-down frame) shows the canvas background
-    outside = max(1, (x1 - x0) * (y1 - y0)) - len(crop)
-    bg = _hex_rgb((design or {}).get("background") or "#102322") if item in t["shots"] else None
-    if bg and outside > .25 * max(1, (x1 - x0) * (y1 - y0)):
-        crop = np.concatenate([crop, np.tile(np.array(bg, np.float32), (min(outside, 4000), 1))])
-    if len(crop) < 20:
-        return None
+    for v in sorted(veils, key=lambda x: x.get("z", 0)):
+        if v.get("kind") == "shape":
+            tone = np.array(_hex_rgb(v["color"]), np.float32)
+        else:  # a translucent picture by its mean: washes are blurred, and a veil of a few tens of percent shows little detail
+            vc = crop_of(v)
+            if vc is None or not len(vc):
+                continue
+            tone = vc.mean(0)
+        crop = crop * (1 - opacity(v)) + tone * opacity(v)
     lum = crop @ np.array([.2126, .7152, .0722], np.float32)
     ref = crop[np.argsort(lum)[int(len(crop) * (.9 if np.mean(tc) > 128 else .1))]]  # the picture most like the text
     return round(_wcag_ratio(tc, tuple(int(v) for v in ref)), 2)
@@ -810,6 +835,21 @@ def audit_timeline(pid, timeline=None):
             findings.append(_finding("info", "outside_safe_region", {"layer": l["id"]}, {"box": [round(v, 3) for v in (x0, y0, x1, y1)], "safe_region": safe},
                                      "Platform buttons/captions may cover this box on vertical feeds (editable heuristic). Verify the "
                                      "rendered glyph box with review_frames before moving it."))
+    # An SVG is fitted inside its box and centred (preserveAspectRatio meet): a 1000x80 view box in a 1690x65 px box is drawn
+    # 810 px wide, so a strip meant to span its panel stops mid-way and its keys no longer line up.
+    for l in layers:
+        if l["kind"] != "svg":
+            continue
+        vw, vh = ((l.get("data") or {}).get("view_box") or [1000, 1000])[:2]
+        bw, bh = l["width"] * W, l["height"] * H
+        if vw <= 0 or vh <= 0 or bw <= 0 or bh <= 0:
+            continue
+        k = min(bw / vw, bh / vh)
+        if min(vw * k / bw, vh * k / bh) < .9:
+            findings.append(_finding("check", "svg_aspect_mismatch", {"layer": l["id"]},
+                                     {"view_box": [vw, vh], "box_px": [round(bw), round(bh)], "drawn_px": [round(vw * k), round(vh * k)]},
+                                     "The view box has another shape than its box, so the drawing is shrunk to fit and centred. Give the "
+                                     "view box the box's pixel proportions (width × frame width : height × frame height)."))
     # Upscaling: a 720p source covering a 9:16 canvas is already ~2.7x; a push on top turns grain into macroblocks.
     # One finding per source (the fit alone is the source's limit), plus each shot whose zoom takes it past 3.25x.
     soft = {}
@@ -2397,9 +2437,13 @@ def source_cuts(timeline, assets, threshold=12.0):
 # ---------------------------------------------------------------- delivery gates (reports/Nâng cấp 3D phim tài liệu.md, P0-4)
 def banding(video, start=None, seconds=None, threshold=5.0):
     """Netflix CAMBI banding score per frame (libvmaf, no reference: the video against itself); around 5 banding starts
-    to annoy. Sky, mist and dark seas are where an 8-bit render bands. Returns {"max", "mean", "over"}."""
+    to annoy. Sky, mist and dark seas are where an 8-bit render bands. Returns {"max", "mean", "over"}, or "unmeasured"
+    with the reason when this FFmpeg has no libvmaf (Ubuntu's and Debian's packages): said, not failed."""
     import json, tempfile
-    from .media import FFMPEG
+    from .media import FFMPEG, has_filter
+    if not has_filter("libvmaf"):
+        return {"max": None, "mean": None, "longest_run": 0, "over": [],
+                "unmeasured": "this FFmpeg is built without libvmaf (CAMBI); INSTALL.md lists builds that have it"}
     cut = (["-ss", str(start)] if start is not None else []) + (["-t", str(seconds)] if seconds else [])
     with tempfile.TemporaryDirectory(dir=str(Path(video).parent)) as td:
         subprocess.run([FFMPEG, "-v", "error", *cut, "-i", str(video), *cut, "-i", str(video), "-lavfi",
@@ -2517,17 +2561,43 @@ def text_contrast(video, timeline, large_px=24):
     median of the box: thin type covers little of it). Large type (>= large_px, labels) needs 3:1, the rest 4.5:1.
     Returns [{"id", "ratio", "needs", "at_s"}] for those below."""
     from PIL import Image
-    from .media import FFMPEG
+    from .media import FFMPEG, probe
     from . import style
-    W, H = timeline.get("width", 1920), timeline.get("height", 1080)
+    # boxes are canvas shares: crop them at the video's own size (a 720p preview cropped at 1080p coordinates read the
+    # wrong place and failed every chip on it)
+    v = next((s for s in probe(str(video))["streams"] if s.get("codec_type") == "video"), {})
+    W, H = int(v.get("width") or timeline.get("width", 1920)), int(v.get("height") or timeline.get("height", 1080))
     lum = lambda rgb: sum(w * ((c / 255) / 12.92 if c / 255 <= .04045 else ((c / 255 + .055) / 1.055) ** 2.4) for w, c in zip((.2126, .7152, .0722), rgb))
+    TW, TH = timeline.get("width", 1920), timeline.get("height", 1080)
+
+    def offset(l, track, frame):
+        """A keyframed move at a layer-local frame (canvas pixels, linear between keys): a label riding a tracked car is
+        read where it is, not where it was authored (that box showed the road beside it, at 1.7:1)."""
+        pts = (l.get("keyframes") or {}).get(track) or []
+        if not pts:
+            return 0.0
+        if frame <= pts[0]["frame"]:
+            return pts[0]["value"]
+        for p, q in zip(pts, pts[1:]):
+            if p["frame"] <= frame <= q["frame"]:
+                return p["value"] + (q["value"] - p["value"]) * (frame - p["frame"]) / max(1e-9, q["frame"] - p["frame"])
+        return pts[-1]["value"]
+
     out = []
+    by_id = {x["id"]: x for x in timeline.get("layers") or []}
     for l in timeline.get("layers") or []:
         if l.get("kind") != "text" or not (l.get("text") or "").strip():
             continue
         t = (l["start_frame"] + l["end_frame"]) / 2 / 30
-        x0, y0 = int(max(0, l["x"]) * W), int(max(0, l["y"]) * H)
-        x1, y1 = int(min(1, l["x"] + l["width"]) * W), int(min(1, l["y"] + l["height"]) * H)
+        mid = (l["end_frame"] - l["start_frame"]) / 2
+        dx, dy = offset(l, "x", mid), offset(l, "y", mid)
+        par = by_id.get(l.get("parent") or "")
+        if par:  # a label riding its parent (one level: the parent's own move)
+            pm = l["start_frame"] + mid - par["start_frame"]
+            dx, dy = dx + offset(par, "x", pm), dy + offset(par, "y", pm)
+        lx, ly = l["x"] + dx / TW, l["y"] + dy / TH
+        x0, y0 = int(max(0, lx) * W), int(max(0, ly) * H)
+        x1, y1 = int(min(1, lx + l["width"]) * W), int(min(1, ly + l["height"]) * H)
         if x1 - x0 < 4 or y1 - y0 < 4:
             continue
         r = subprocess.run([FFMPEG, "-v", "error", "-ss", f"{t:.3f}", "-i", str(video), "-frames:v", "1", "-vf", f"crop={x1 - x0}:{y1 - y0}:{x0}:{y0}",
@@ -2561,7 +2631,8 @@ def _mean_luma(video, start, seconds):
 def delivery_gates(video, timeline=None, lang="vi"):
     """The cheap delivery gates in one report, cheapest first: legal levels, flashes, still pictures, cuts to black,
     banding, then (with the timeline) text holds and text contrast. Returns {"pass", "gates": {...}}. A gate that cannot
-    run (a decoder out of memory) is reported as an error and fails the report; it never stops the other gates."""
+    run (a decoder out of memory) is reported as an error and fails the report; it never stops the other gates. A gate
+    this FFmpeg build cannot measure (banding without libvmaf) is listed under "unmeasured"."""
     g, errors = {}, {}
     for name, fn in (("legal_levels", lambda: legal_levels(video)), ("flashes", lambda: flashes(video)), ("still", lambda: still_runs(video)),
                      ("black", lambda: black_cuts(video)), ("banding", lambda: banding(video))):
@@ -2604,4 +2675,5 @@ def delivery_gates(video, timeline=None, lang="vi"):
     ok = (not errors and g["legal_levels"]["frames"] <= 15 and not g["flashes"]["fails"] and g["banding"]["longest_run"] < 12
           and not any(b.get("hard") and not b.get("intended") for b in g["black"]) and not g.get("text_holds") and not g.get("text_contrast")
           and not any(r.get("too_long") or r.get("not_black") for r in g.get("intent", [])))
-    return {"pass": ok, "gates": g}
+    unmeasured = [k for k, v in g.items() if isinstance(v, dict) and v.get("unmeasured")]
+    return {"pass": ok, "gates": g, **({"unmeasured": unmeasured} if unmeasured else {})}

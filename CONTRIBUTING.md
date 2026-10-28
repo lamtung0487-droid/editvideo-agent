@@ -14,3 +14,8 @@ do reliably per token, not by UI.
 - Run `python -m pytest -q` before sending a change. Media tests refuse to run with less than ~2 GB free where their
   temporary folders live; on a full system drive point pytest elsewhere: `python -m pytest -q --basetemp D:/tmp/pytest`.
 - Do not commit `data/`, `outputs/`, models or media.
+
+**History.** The public repository starts from a snapshot: earlier development happened in a private repository whose
+history carries personal data, so it was not published. From the snapshot on, every change lands here as a normal
+commit or pull request. The test files named `test_round*.py` group tests by the build round that added them; put new
+tests in a file named after the feature.

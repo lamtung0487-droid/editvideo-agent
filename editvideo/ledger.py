@@ -134,11 +134,56 @@ def register_cut(path, source, window=None, notes="", license=None, credit=None)
 
 
 def register_render(path, title, parts, kind="footage"):
-    """A render (Blender, a composite) made from inputs: parts [(licence, credit)]; its licence names every part and so
-    takes the most restrictive class."""
-    lic = " + ".join(dict.fromkeys(l for l, _ in parts))
-    cred = " · ".join(dict.fromkeys(c for _, c in parts))
-    return _register_outside(path, kind, title, lic, cred, "", "render", "inputs: " + lic, "render")
+    """A render (Blender, a composite) made from inputs: parts [(licence, credit[, title, source_url])]; its licence names
+    every part and so takes the most restrictive class, and each part stays a work of its own in the ledger's count and
+    in the credits."""
+    lic = " + ".join(dict.fromkeys(p[0] for p in parts))
+    cred = " · ".join(dict.fromkeys(p[1] for p in parts))
+    works = [{"title": p[2] if len(p) > 2 and p[2] else p[1], "license": p[0], "credit": p[1], "source_url": p[3] if len(p) > 3 else "",
+              "used": ["picture", "audio"], "kind": "render input"} for p in parts]
+    return _register_outside(path, kind, title, lic, cred, "", "render", "inputs: " + lic, "render", parts=works)
+
+
+def register_project_render(path, pid, title, kind="footage"):
+    """A render of another EditVideo project (a nested film, a beat-cut montage, a contact sheet of a cut) carries that
+    project's ledger: one part per distinct work, with what of it (picture, audio) the project used. A project that uses
+    the render then credits and counts each work; registered as one file under one licence, a montage of five reels by
+    two authors had been credited to one of them, and its other reels were in no ledger."""
+    works = project_ledger(pid, "internal", write=False)["works"]
+    if not works:
+        raise ValueError(f"Project {pid}'s ledger names no third-party work: register the render with register_source")
+    parts = [{k: w.get(k) for k in ("title", "license", "credit", "source_url", "used", "kind")} for w in works]
+    lic = " + ".join(dict.fromkeys(w["license"] for w in parts))
+    cred = " · ".join(dict.fromkeys(w["credit"] for w in parts))
+    return _register_outside(path, kind, title, lic, cred, "", "render", f"render of project {pid}", "render", parts=parts)
+
+
+def _reel(e):
+    """The reel a cut (or a cut of a cut) was taken from: its work, under the reel's own title."""
+    by_id = None
+    for _ in range(6):
+        m = re.search(r"\bfrom ([a-z0-9-]+)$", e.get("notes") or "") if e.get("tags") == "archive cut" else None
+        if not m:
+            return e
+        by_id = by_id or {x["id"]: x for x in resources._load()}
+        if m.group(1) not in by_id:
+            return e
+        e = by_id[m.group(1)]
+    return e
+
+
+def _works(rows):
+    """The distinct third-party works behind the rows: a reel cut into many clips, or reached through a nested render and
+    directly, is one work (same page, or same title and credit). EditVideo's own synthesis is not a work."""
+    out = {}
+    for r in rows:
+        for w in r.get("works") or []:
+            key = w.get("source_url") or (w["title"], w["credit"])
+            got = out.setdefault(key, {**w, "used": [], "in": []})
+            got["used"] = sorted(set(got["used"]) | set(w.get("used") or []))
+            if r.get("name") not in got["in"]:
+                got["in"].append(r.get("name"))
+    return sorted(out.values(), key=lambda w: (ORDER.index(w["class"]), w["title"]))
 
 
 def _uses(t):
@@ -203,20 +248,33 @@ def project_ledger(pid, use="online", write=True):
             e, chain = resources.trace_origin(a, index)
             lic, cred = (e["license"], e["credit"]) if e else ("unknown", "")
         parts_used = tuple(sorted({"audio" if w.startswith(("audio", "project music")) else "picture" for *_, w in spans}))  # what of it the film actually uses
-        rows.append({"asset": aid, "name": a.get("name"), "kind": a.get("kind"), "origin": e["id"] if e else None, "title": e["title"] if e else a.get("tags"),
-                     "license": lic, "used": list(parts_used), "class": classify(lic, parts_used), "classes": sorted(classes(lic, parts_used)), "credit": cred, "source_url": (e or {}).get("source_url", ""), "via": chain,
-                     "seconds": _seconds(spans), "first_frame": min(s[0] for s in spans), "where": sorted({w for *_, w in spans})[:12]})
+        works = None
+        if e and e.get("parts"):  # a render: the works in the part of it this film uses (its picture, its sound)
+            works = [{**w, "used": sorted(set(w.get("used") or parts_used) & set(parts_used))} for w in e["parts"]]
+            works = [{**w, "class": classify(w["license"], tuple(w["used"]))} for w in works if w["used"]]
+            lic = " + ".join(dict.fromkeys(w["license"] for w in works)) or "Generated locally by EditVideo (procedural, no third-party rights)"
+        row = {"asset": aid, "name": a.get("name"), "kind": a.get("kind"), "origin": e["id"] if e else None, "title": e["title"] if e else a.get("tags"),
+               "license": lic, "used": list(parts_used), "class": classify(lic, parts_used), "classes": sorted(classes(lic, parts_used)), "credit": cred, "source_url": (e or {}).get("source_url", ""), "via": chain,
+               "seconds": _seconds(spans), "first_frame": min(s[0] for s in spans), "where": sorted({w for *_, w in spans})[:12]}
+        row["works"] = works if works is not None else ([] if row["class"] == "procedural" else
+                                                          [{"title": (_reel(e)["title"] if e else row["title"] or row["name"]), "license": lic, "credit": cred, "source_url": row["source_url"],
+                                                            "used": list(parts_used), "kind": a.get("kind"), "class": row["class"]}])
+        rows.append(row)
     index.save()
     # type: the fonts drawn on screen (their licence files travel in the delivery ZIP)
     fonts = {s.get("font_id") for s in ((t.get("design") or {}).get("typography") or {}).values()} | {l.get("font_id") for l in t.get("layers", [])}
     for fid in sorted(x for x in fonts if x):
         it = design_library.font(fid)
         rows.append({"asset": f"font:{fid}", "name": it["family"], "kind": "font", "origin": fid, "title": it["family"], "license": it["license"],
-                     "class": classify(it["license"]), "classes": sorted(classes(it["license"])), "credit": it["family"], "source_url": "", "via": [], "seconds": None, "first_frame": None, "where": ["text"]})
+                     "class": classify(it["license"]), "classes": sorted(classes(it["license"])), "credit": it["family"], "source_url": "", "via": [], "seconds": None, "first_frame": None, "where": ["text"],
+                     "works": [{"title": it["family"], "license": it["license"], "credit": it["family"], "source_url": "", "used": ["picture"], "kind": "font",
+                                "class": classify(it["license"])}]})
     voice = resources._voice_credit(pid)
     if voice:
         rows.append({"asset": "voice", "name": voice["credit"], "kind": "voice", "origin": None, "title": "narration voice", "license": voice["license"],
-                     "class": classify(voice["license"]), "classes": sorted(classes(voice["license"])), "credit": voice["credit"], "source_url": "", "via": [], "seconds": None, "first_frame": None, "where": ["narration"]})
+                     "class": classify(voice["license"]), "classes": sorted(classes(voice["license"])), "credit": voice["credit"], "source_url": "", "via": [], "seconds": None, "first_frame": None, "where": ["narration"],
+                     "works": [{"title": "narration voice", "license": voice["license"], "credit": voice["credit"], "source_url": "", "used": ["audio"], "kind": "voice",
+                                "class": classify(voice["license"])}]})
     blockers = [r for r in rows if r["class"] in BLOCKS[use]]
     duties = {}
     for r in rows:  # every part of a composite carries its own duty (a PD + CC BY render still owes the CC BY credit)
@@ -229,7 +287,9 @@ def project_ledger(pid, use="online", write=True):
         b = by_class.setdefault(r["class"], {"assets": 0, "seconds": 0.0})
         b["assets"] += 1
         b["seconds"] = round(b["seconds"] + (r["seconds"] or 0), 2)
+    works = _works(rows)
     out = {"project": pid, "use": use, "verdict": "blocked" if blockers else "clear", "by_class": by_class,
+           "works": works, "work_count": len(works), "works_by_kind": {k: sum(str(w.get("kind")) == k for w in works) for k in sorted({str(w.get("kind")) for w in works})},
            "blockers": [{k: r[k] for k in ("asset", "name", "title", "license", "class", "seconds", "first_frame")} for r in blockers],
            "obligations": {k: {"duty": DUTY[k], "assets": v[:20], "count": len(v)} for k, v in duties.items()},
            "rows": rows,

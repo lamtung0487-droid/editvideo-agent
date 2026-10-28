@@ -42,8 +42,15 @@ ffmpeg -version
 git --version
 ```
 
-Cần Python 3.11 trở lên, Node 22 trở lên và FFmpeg 6 hoặc 7. Nếu PowerShell không cho chạy script, cho phép script
-local một lần cho tài khoản của bạn:
+Cần Python 3.11 trở lên, Node 22 trở lên và FFmpeg 6.1 trở lên (bộ test chạy qua với 6.1, 7.1 và 8.1). Phép đo
+banding trong báo cáo giao hàng cần FFmpeg có libvmaf. Bản gyan.dev mà winget cài và bản của Homebrew đều có. Gói của
+Ubuntu và Debian thì không, nên báo cáo sẽ ghi banding là `unmeasured`.
+
+Giữ đường dẫn thư mục clone dưới khoảng 100 ký tự (ví dụ `C:\src\editvideo-agent`). File cài đặt nằm sâu tới khoảng
+155 ký tự bên dưới thư mục đó, mà Windows từ chối đường dẫn dài quá 260 ký tự nếu chưa bật long paths. `setup.ps1`
+kiểm tra điều này trước khi cài.
+
+Nếu PowerShell không cho chạy script, cho phép script local một lần cho tài khoản của bạn:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
@@ -56,6 +63,9 @@ sudo apt-get update
 sudo apt-get install -y python3 python3-venv ffmpeg git   # Python 3.11 trở lên
 # Node.js 22 cài qua nodesource hoặc nvm
 ```
+
+FFmpeg cài bằng apt không có libvmaf, nên banding sẽ được ghi là `unmeasured`. Muốn đo banding, đặt một bản build
+tĩnh có libvmaf lên đầu `PATH`. Kiểm tra bằng `ffmpeg -hide_banner -filters | grep libvmaf`.
 
 ### macOS (chưa kiểm thử)
 
@@ -233,6 +243,8 @@ include_schema=true)`.
 | Hiện tượng | Nguyên nhân và cách xử lý |
 |---|---|
 | Không tìm thấy `ffmpeg` | Mở lại shell sau khi cài; chạy `ffmpeg -version`; thêm thư mục `bin` của FFmpeg vào `PATH`. |
+| `setup.ps1` dừng vì đường dẫn thư mục quá dài, hoặc pip/npm báo `No such file or directory` với một đường dẫn dài | Giới hạn 260 ký tự của Windows. Clone vào đường dẫn ngắn như `C:\src\editvideo-agent`, hoặc bật long paths một lần trong PowerShell quyền quản trị: `New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name LongPathsEnabled -Value 1 -PropertyType DWORD -Force`, rồi chạy `git config --global core.longpaths true`. |
+| Báo cáo giao hàng ghi `"unmeasured": ["banding"]` | FFmpeg đang dùng không có libvmaf (gói của Ubuntu và Debian). Các phép đo khác vẫn chạy; muốn đo banding thì cài một bản có libvmaf. |
 | `npm ci` lỗi | Node cũ hơn 22, hoặc do proxy; kiểm tra `node --version`; đặt `HTTPS_PROXY`. |
 | Render đứng ở bước "Downloading Chrome Headless Shell" | Script cài đặt đã tải sẵn một lần; nếu lần đó bị ngắt, chạy `node --input-type=module -e "const r = await import('@remotion/renderer'); await r.ensureBrowser()"` trong `engines/`. |
 | pip báo `ReadTimeoutError` | Mirror chậm; script đã tự thử lại. Chạy lại `setup.ps1`, các gói đã cài được giữ nguyên. |

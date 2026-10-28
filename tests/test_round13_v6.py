@@ -574,7 +574,9 @@ def test_the_finish_breaks_up_banding_in_a_dark_gradient(tmp_path):
     """The bloc map's dark sea measured CAMBI 6.6 raw and 0.003 through editvideo.finish."""
     import subprocess
     from editvideo import finish, review
-    from editvideo.media import FFMPEG
+    from editvideo.media import FFMPEG, has_filter
+    if not has_filter("libvmaf"):
+        pytest.skip("this FFmpeg has no libvmaf (CAMBI); test_banding_without_libvmaf_is_unmeasured covers that build")
     raw = tmp_path / "raw.mp4"
     subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "lavfi", "-i", "gradients=s=640x360:c0=0x0b1018:c1=0x1c2a36:x0=0:y0=0:x1=640:y1=360:d=1:r=30",
                     "-vf", "format=yuv420p", "-c:v", "libx264", "-crf", "18", str(raw)], check=True)
@@ -582,6 +584,18 @@ def test_the_finish_breaks_up_banding_in_a_dark_gradient(tmp_path):
     subprocess.run([FFMPEG, "-v", "error", "-y", "-i", str(raw), "-filter_complex", finish.filter_graph(640, 360), "-map", "[v]", "-c:v", "libx264",
                     "-crf", "18", *finish.encode_args(), str(out)], check=True)
     assert review.banding(out)["mean"] < review.banding(raw)["mean"]
+
+
+def test_banding_without_libvmaf_is_unmeasured(tmp_path, monkeypatch):
+    """Ubuntu's FFmpeg package has no libvmaf: the delivery report says banding was not measured instead of failing."""
+    import subprocess
+    from editvideo import media, review
+    clip = tmp_path / "c.mp4"
+    subprocess.run([media.FFMPEG, "-v", "error", "-y", "-f", "lavfi", "-i", "testsrc2=s=320x180:d=1:r=30", "-pix_fmt", "yuv420p", str(clip)], check=True)
+    monkeypatch.setattr(media, "_FFMPEG_FILTERS", [" ... scale             V->V       Scale the input video size and/or convert the image format.\n"])
+    assert review.banding(clip)["unmeasured"]
+    r = review.delivery_gates(str(clip))
+    assert r["unmeasured"] == ["banding"] and "banding" not in r["gates"].get("errors", {})
 
 
 def test_flashes_and_legal_levels_are_screened(tmp_path):

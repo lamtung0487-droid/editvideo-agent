@@ -113,10 +113,10 @@ API keys are read from the environment only and never written into project files
 
 | | Required | Optional |
 |---|---|---|
-| OS | Windows 10/11 (the tested platform) | Linux (core runtime, run in CI), macOS (untested) |
+| OS | Windows 10/11 (the tested platform; setup tested in Windows PowerShell 5.1; a clone path under ~100 characters unless long paths are enabled) | Linux (core runtime, run in CI), macOS (untested) |
 | Python | 3.11 or newer | |
 | Node.js | 22 or newer (Remotion and HyperFrames) | |
-| FFmpeg / FFprobe | on `PATH` | |
+| FFmpeg / FFprobe | 6.1 or newer on `PATH` (tested with 6.1, 7.1 and 8.1) | a build with libvmaf, for the banding gate |
 | GPU | none for the core | NVIDIA with CUDA 12.4 for the vision and temporal extras; tested on 12 GB VRAM |
 | Disk | ~2 GB for the core install, plus space for the data directory | +2.5 GB vision, more for temporal/LTX; ~600 MB voice |
 | 3D | | Blender 4.x/5.x (headless), MoGe-2 weights |

@@ -118,3 +118,22 @@ def test_snap_modes_priority_hits_against_and_protect(song, monkeypatch):
     assert isinstance(pr["section_entries_without_cut"], list)
     with pytest.raises(ValueError):
         music.snap_cuts("p", 7, beat_times=[1, 2], use="hits")
+
+
+def test_snap_reads_the_whole_track_and_returns_the_grid_it_cut_to(song, monkeypatch):
+    """Analysed from music_start, the reel's bed had come out at 133 BPM where music_structure (the whole track) said 200:
+    the cuts went to one grid while the picture drew the other. The snap now reads the grid music_structure returns, and
+    says where each cut went in the music."""
+    from editvideo import agent
+    path, _ = song
+    whole = music.structure(path, bpm_range=(90, 180))
+    start, fr = 20.0, lambda t: round((t - 20.0) * 30)
+    cuts = [fr(b) + 3 for b in whole["beats"][40:60:4]]
+    edges = [0, *cuts, 1500]
+    shots = [{"id": f"s{i}", "start_frame": a, "end_frame": b} for i, (a, b) in enumerate(zip(edges, edges[1:]))]
+    monkeypatch.setattr(agent, "read", lambda pid: {"revision": 7, "timeline": {"shots": shots}})
+    r = music.snap_cuts("p", 7, path, use="beats", lead_frames=0, music_start=start, dry_run=True, bpm_range=(90, 180))
+    assert "whole track" in r["beat_info"]["analysis"] and r["beat_info"]["bpm"] == whole["bpm"]
+    beats = set(round(b, 3) for b in whole["beats"])
+    assert r["targets"] and all(t["music_s"] in beats and abs(t["frame"] - fr(t["music_s"])) <= 1 for t in r["targets"])
+    assert len(r["planned"]) == len(cuts) and all(m["music_s"] in beats and abs(m["to"] - fr(m["music_s"])) <= 1 for m in r["planned"])

@@ -110,7 +110,7 @@ After outputs are real local files, place them with `sequence_plan` (short seque
 for longer films. `film_world` can store 160 shots; assemble long works in scenes. Preserve reference identities
 and declare state updates when revising one scene. Existing `learning_library` supplies related craft lessons.
 
-## TikTok craft: evidence, tools and limits (round 9)
+## TikTok craft: evidence, tools and limits
 
 What makes a short vertical video hold attention, graded by evidence, and what the system builds and checks for it.
 Grades: **S** spec/standard, **PR** peer-reviewed, **P** platform research (internal, correlational, mostly ads),
@@ -166,7 +166,7 @@ Face focus uses OpenCV's bundled Haar detectors: small, turned-away or heavily l
 face hold the last one). Text rules need the project timeline: there is no OCR of arbitrary videos. Contrast on the
 render is a screen; `review_frames` measures exact glyphs. No trending-sound sourcing; the beat bed is procedural.
 
-## Effect combinations by genre: evidence, tools and limits (round 10)
+## Effect combinations by genre: evidence, tools and limits
 
 Which accents go together, where they land against the music, and how four genres differ. Pro editors rarely publish
 numbers: most frame counts come from tutorials and forums (**H**), some are the system's defaults (**D**, not
@@ -237,7 +237,7 @@ small in 9:16. Off-speed playback (e.g. 0.85x) of a 24 fps WebM source still dif
 frame on about a third of its frames (both are real frames; the browser's seek lands on the earlier one near a frame
 boundary): measured, not yet fixed.
 
-## Seeing what is in the frame; archival, science and product films (round 11)
+## Seeing what is in the frame; archival, science and product films
 
 Round 10's largest limit was semantic: the system measured motion but not content, so its strongest "action" in a
 rally clip was a spectator's hand. Round 11 adds offline open-vocabulary sight, then builds three genres with it.
@@ -313,7 +313,7 @@ flagged its black first frame: the dark reveal now shows the rim's edge from fra
 "person", actions and relations are beyond it. Scores compare within a query. Its boxes are in source shares; map them
 with `semantic.to_canvas` before placing anything on the canvas. The archival film's sound is synthesized.
 
-## Learning from a film and making one like it (round 12)
+## Learning from a film and making one like it
 
 The user upgraded learnkit and asked for a test of strength: learn from a beautiful film and remake it. The exemplar was
 "THE BEAUTY OF VIETNAM" (Kirk Mihelakos, 150 s, studied locally, never reused). learnkit registered it, Claude

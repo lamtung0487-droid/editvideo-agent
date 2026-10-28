@@ -94,7 +94,7 @@ Tool: `process_color(request.grade={...})` then `color_scopes` before/after.
 Tools: `design_sound` (14 kinds, `onset_s`/`peak_s`), `sfx_sync`, `audit_audio` (density, repeats, unresolved risers,
 dead air, true peak).
 
-## 7. Compositing (round 2: mattes, keying, rigs, node thinking)
+## 7. Compositing: mattes, keying, rigs, node thinking
 
 - **Parenting and nulls.** `parent: <layer id>` makes a layer inherit translate/scale/rotate (not opacity or filters) around
   the parent's `anchor`; `kind: "null"` is an invisible controller. `parent_bind_frame` keeps the child where it is at that
@@ -165,7 +165,7 @@ dead air, true peak).
 Set `normalize: true` to measure the used section of each source and bring it to its role target; `volume` trims on
 top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audit_audio`.
 
-## 12. Editing to music (round 3)
+## 12. Editing to music
 
 - **Beat times are calibrated.** `beat_track`/`music_structure` place beats on the attack (±2 ms on click tracks; the
   tracker used to report them ~73 ms early). Onset strength mixes linear-bin flux, mel-band flux and kick-band flux so
@@ -249,7 +249,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
   animates chosen words only (emphasis by position). `tracking` is in em and keeps centred titles centred.
 - Rules: readable hold ≥ 0.6 s + 0.3 s per word (never < 1.5 s); exit ≤ half the entry; main-to-secondary ≥ 2.5×.
 
-## 15. VFX and finishing (round 3)
+## 15. VFX and finishing
 
 - **Planar tracking → corner pin.** `track_plane(path, corners, start, end)` follows a flat surface in perspective
   (≤1.2 px on a synthetic move with a crossing occluder); `screen_replace` pins any layer onto it (`corner_pin` track,
@@ -263,7 +263,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
   gravity, wind, turbulence; size/opacity/colour over life; streaks with a shutter). Use `blend: add` on dark plates.
 - **Blend modes:** add (plus-lighter), soft_light, hard_light, color_dodge join screen/multiply/overlay.
 
-## 16. Dialogue and podcasts (round 4)
+## 16. Dialogue and podcasts
 
 - **Read first:** `read_dialogue` gives speech regions (adaptive floor, about ±2 frames), speakers (pitch + spectral
   clustering, no identity; pass `speakers` when known), turns, pause statistics and filler candidates (flat-pitch steady
@@ -283,7 +283,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
 - **Podcast multicam (measured):** cut to the next speaker about 20 frames before their turn; the wide covers bursts of
   overlapping turns (about 3.5 s); shots 3.5-4.3 s. Social clips stand alone at 1 minute or less.
 
-## 17. Colour: matching, secondaries, film (round 4)
+## 17. Colour: matching, secondaries, film
 
 - **Balance every shot, then match to a hero** (`color_match`): per-channel gain/offset from channel percentiles, a
   5-point luma curve, saturation from the chroma ratio, and a skin secondary when skin hues differ. It reports
@@ -299,7 +299,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
   (16 mm about 2x the size and 1.5x the amplitude of 35 mm; blend overlay keeps grain in the midtones), gate weave,
   dust, a print look via LUT. Measured film-emulation black points 1.5-4 %, white shoulders 81-94 %.
 
-## 18. Animation principles as data (round 4)
+## 18. Animation principles as data
 
 - `animate` compiles verbs (hop, drop, slide_to, turn, rock, pop, hit, enter, exit) with a material (ui, stiff, rubber,
   soft) into keyframes and track modifiers. Measured rules it follows: anticipation about 3x the action (crouch 5,
@@ -312,7 +312,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
 - `motion_quality` samples the runtime and flags mechanical moves (peak/mean speed < 1.15; eased moves measure
   1.5-2.3), abrupt stops, straight paths on organic moves, area changes and twin layers.
 
-## 19. Short-form and ads (round 4)
+## 19. Short-form and ads
 
 - **Pace by events, not cuts:** cuts + punch-ins + graphic pops. Measured retention edits: 10.8-14.7 events/min,
   median gap 3.3-4.2 s, first change by about 2.6 s, opening about 2x the body. `event_profile` reads this from any
@@ -325,7 +325,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
   0.9-3 s, hero reveal by 2.4 s, sections about 3.6 s, offer tags at about 31 % and 52 %, a 0.6 s music drop before the
   main offer, a CTA end card ≥ 3 s (about 12 %) with logo and the bed ducked 15 dB, ≤ 4 words per line and ≤ 7 on screen.
 
-## 20. Round 5: multicam, room tone, aspect, rigs, product shots, tracked windows
+## 20. Multicam, room tone, aspect, rigs, product shots, tracked windows
 
 - **Multicam** (`multicam`): angles sync to the master by onset cross-correlation refined on the waveform (within
   ~0.2 frame on synthetic angles), speakers map to the single that hears them loudest, and the switch follows the
@@ -350,7 +350,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
 - **Titles**: stacked titles get line height ≥ 1.2 so Vietnamese marks on adjacent lines never touch; documentary time
   cards use ≥ 26 px labels at 1080p (phone-readable).
 
-## 21. Round 6: rigs, scene-referred colour, evidence in 3D, independent review
+## 21. Rigs, scene-referred colour, evidence in 3D, independent review
 
 - **Two-bone IK** (`layer.ik` on the lower bone, whose parent is the upper bone): both bones rotate so `ik.tip` (a point
   in the lower bone's box) reaches the target layer's anchor — usually a null with keyframes. Law of cosines, exact to
@@ -383,7 +383,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
 - **Independent review**: run the `editvideo-reviewer` agent (rubric in REVIEW_RUBRIC.md) on a render or on the code;
   it returns P0/P1/P2 findings with evidence and the level to fix them at. The round-6 sample-film fixes came from it.
 
-## 22. Round 7: narration → picture → rhythm, effect atlas, four real builds
+## 22. Narration → picture → rhythm, effect atlas, four real builds
 
 - **beat_map after narration is placed.** For every spoken sentence it lists the shots under it (and whether they are
   evidence or illustration), the visual events while it is said, and on-screen text that repeats the words with its
@@ -425,99 +425,7 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
   stay small (a few %) and punches stay ≤ ~1.15; `adapt_aspect` caps inherited zooms to ~3x and steps a punch out
   rather than in when the cap would shrink it into a jump.
 
-## 27. Round 12: learning a film and making one like it; the picture first
-
-- Learn: `learn register` the exemplar (local copy, its licence in `usage`), `anatomy` its parts, `evidence` to look,
-  `distill` a blueprint whose targets the exemplar measured, then build, render and `learn conform` the render. The
-  conformance number counts targets in range; read the misses and the features behind them, not the score (the first
-  rebuild and a far better one both scored 0.786).
-- Choose footage by picture before content: `rank_clips(min_look="B")` or `editvideo.look.measure(path, start, end)`
-  per window. A C is upscaled (source smaller than the canvas), shaky (> 4 px per 1/15 s after smooth camera moves are
-  removed) or noisy; noise is read spatially (flat pixels) and temporally (two aligned consecutive frames, which also
-  reads night and textured footage); `noise: None` with the flag `noise unmeasured` means neither could look (a still
-  of pure texture, a cut) and caps the grade at B.
-- Before rendering, read `audit_timeline` for `repeated_picture` / `repeated_source` (a few clips on a loop; the same
-  scene shown again from another moment counts, by ORB features, not only the same picture), `off_cadence_footage`
-  (24/25/50 fps at 1x: set `frame_sampling: "flow"` on shots with camera movement; it renders slower, about 2 frames a
-  second per window, cached; where a fast foreground or occlusion would ghost, the render measures it and takes the
-  nearest source frame instead, logging the shot) and `matte_cuts_subject` (a letterbox bar across a face or a
-  medium shot's head). With too little material, cut fewer, longer shots rather than reuse.
-- Brands: ask `find_subjects` for "a brand logo" and "a soft drink advertisement sign" (scores around .15-.35) and
-  skip those windows; a sign in every frame rules the clip out.
-- Grade toward the exemplar per shot (saturation up to x1.35 where a shot is short of the target, nothing where it is
-  already there); let the light fall at dusk (brightness about .88) and leave night alone.
-- A selection script that applies all of this slot by slot: `examples/round12/build_travel_v4.py`.
-- Evidence and limits: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#learning-from-a-film-and-making-one-like-it-round-12).
-
-## 26. Round 11: seeing what is in the frame; archival, science and product films
-
-- `find_subjects` (offline OWLv2 + SigLIP, installed once with `allow_download` after the user agrees): `queries`
-  ["rally car"] give per clip spans, share and the best view {at, score, box, area}; `best.box` seeds `track_subject`.
-  `text` or `image` {path, at} rank windows by similarity. Boxes are source-frame shares: map them with
-  `semantic.to_canvas` through the shot's fit and focus before placing anything (a 4:3 photo framed 16:9 moves them).
-- `rank_clips(subject=...)` ranks by the subject's presence and size and reports `subject.at`, its clearest view.
-- `compose_edit lower_third` `avoid: "gorilla"` takes the side clear of the detected subject.
-- Archival stills: aim each 5-8 % move (`focus_zoom` amount and focus point) at the detected subject; crop a scan to
-  its detected postcard or print (`focus_zoom` cut to fill); orient with the map, its zoom's fixed point on the feature,
-  a `tracked_callout` on it. TIFF scans and images over 40 MP import as JPEG working copies with their credit.
-- Vertical from wide renders (science, product, space): `find_subjects(queries, frame_for="vertical")` returns per
-  subject a shot framing (`fit`, focus, a held `focus_zoom` and the subject's canvas box) that keeps it whole; in code
-  `semantic.frame_subject(box, sw, sh, cw, ch, region=...)` keeps it inside the area the titles leave free
-  (`inside_region: false` when no framing can: move the titles instead). A subject
-  wider than a 9:16 crop is framed up from contain (zooming a shot out never shows more of its source); set the
-  timeline's `design.background` to the footage's black so the bands disappear (`create_silent_project` uses its colour).
-  Try a second query when one misses ("space telescope" missed the sunshield view, "spacecraft" found it).
-- Product reveals: `compose_product reveal: "dark"` (rim light first, key light at `reveal_at`, fog on the floor, slow
-  orbit); the camera fits the layer's aspect, so 9:16 works; `.gltf` models pack with `media.pack_gltf`.
-- Pictures import as they are shown: old transfers with non-square pixels (PAL 720x576 shows 4:3), rotated phone video
-  and EXIF-rotated photos become upright square-pixel working copies; sources with dropped frames render from a
-  constant-rate proxy.
-- Off-speed shots (any `playback_rate` other than 1) play a pre-timed 30 fps clip in both engines, frame-identical.
-- Evidence and limits: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#seeing-what-is-in-the-frame-archival-science-and-product-films-round-11).
-
-## 25. Round 10: effect combinations by genre, many sources
-
-- Choose material across many clips with `rank_clips`: windows ranked by motion, local action, sharpness and colour,
-  each with its action peak (absolute source seconds) and motion direction; cross-clip match cuts (never two moments
-  of one take); which clips are silent; a contact sheet. Look at the sheet: a peak is measured movement (a
-  spectator's hand counts), not the moment that matters.
-- Land accents on the music with `accent_sync(style)`: velocity, travel, food, product or nature (none). Drops are
-  music-file seconds (default: loud peak entries); one stacked hit per drop (white flash, decaying shake, RGB split
-  + impact/riser), a flash or light leak per phrase, a punch at most once per bar; re-runs replace.
-- Slow motion on the action: `retime_footage` `peaks` (source seconds) slowed to `peak_speed` for `hold_s` with S-curve
-  `ramp_s`, flow-interpolated; place the result at 1x. Hold a moment with patch `freeze_frame` (a flash and a punch-in
-  on the still, the shot's look kept on every part); a freeze shot needs only its one source frame, so it can hold a
-  clip's last frame.
-- Stacks in one call: patch `apply_combo` (e.g. `impact_title` on a title). Two clips at once: `compose_edit`
-  `split_screen` (rows in 9:16, columns in 16:9, grid for four). Recipe cards fade out as they fade in.
-- Mute nature footage: `design_sound` `forest` / `rain` beds (<= 60 s, synthesized; say so in the credits), the
-  ambience leading the picture cut (J-cut) and trailing it (L-cut).
-- Templates: `professional_toolkit(platform=tiktok)` sports_velocity, nature_doc, food_short, city_montage.
-- Check text against the footage: `audit_timeline` `low_contrast_plate` measures unplated, unoutlined text against
-  the source frame under it (any aspect ratio); text on a plate is inset and centred by both engines.
-- Evidence, the music hierarchy, the four builds and their lessons: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#effect-combinations-by-genre-evidence-tools-and-limits-round-10).
-
-## 24. Round 9: TikTok / Reels / Shorts
-
-- One platform table (`platforms.py`): organic UI zones (heuristic) and the published AD safe zones; the area clear
-  on all three platforms' ads is x 120-888, y 288-1248 at 1080x1920. `review.SAFE`, `adapt_aspect`, `ad_audit` and
-  `professional_toolkit` all read it.
-- `shortform_audit` reads the rendered file: first frame, first change (<= 1 s), cut pace (0.19-0.52/s for talking
-  heads; faster flagged), stills over 5.3 s, bars, loudness (-14 LUFS) and true peak, delivery spec, and with the
-  project: text under the UI, first text (<= 2 s), key message (<= 3 s), caption coverage and word sync, contrast on
-  the real plate, CTA for ads. It returns cover candidates and five frames with the platform UI drawn over.
-- Captions: `word_captions` `word_animation` pop/bounce/rise and `outline`, rendered by the shared widget so both
-  engines match; outlined captions drop the box by default; pages keep names and compounds together; `translations`
-  adds a caller-written line in another language under the spoken words.
-- Flash shots: a picture visible for under 0.3 s between two cuts (B-roll in/out included) is flagged by
-  `audit_timeline` (`flash_shot`) and `shortform_audit` (`flash_cut`); `punch_in` never lands under or beside a
-  full-frame B-roll.
-- Talking heads: `reframe_footage` `auto_focus: faces`; `condense_dialogue` `windows` + `transcript`; `punch_in`
-  `ladder` changes the framing at every cut in one take and caps the zoom by source resolution.
-- `design_sound` `beat`: a 60-180 BPM bed (TikTok reports >120 BPM music with higher view-through) with its beat times.
-- Evidence, templates and limits: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#tiktok-craft-evidence-tools-and-limits-round-9).
-
-## 23. Round 8: reading holds, sentence strips, offline voice, pinned labels
+## 23. Reading holds, sentence strips, offline voice, pinned labels
 
 - **Still is not dead.** A chart that draws in and then holds for reading is a reading hold, not a static frame;
   the audit measures the longest still stretch against the words and graphics on screen (~3 words/s + 1-2 s to take
@@ -544,3 +452,95 @@ top. Master stays two-pass loudnorm with true peak ≤ -1 dBFS; check with `audi
   a square or vertical) to reach `correction_capped: false`; then `retime_footage` with motion blur. The audit judges
   the effective speed (retime x playback rate) against `residual_px_over_frames` (< 2 px per output frame).
 - **Silent edits.** `create_silent_project(profile, seconds)` gives an exact-length silent timeline for reels and ads.
+
+## 24. TikTok / Reels / Shorts
+
+- One platform table (`platforms.py`): organic UI zones (heuristic) and the published AD safe zones; the area clear
+  on all three platforms' ads is x 120-888, y 288-1248 at 1080x1920. `review.SAFE`, `adapt_aspect`, `ad_audit` and
+  `professional_toolkit` all read it.
+- `shortform_audit` reads the rendered file: first frame, first change (<= 1 s), cut pace (0.19-0.52/s for talking
+  heads; faster flagged), stills over 5.3 s, bars, loudness (-14 LUFS) and true peak, delivery spec, and with the
+  project: text under the UI, first text (<= 2 s), key message (<= 3 s), caption coverage and word sync, contrast on
+  the real plate, CTA for ads. It returns cover candidates and five frames with the platform UI drawn over.
+- Captions: `word_captions` `word_animation` pop/bounce/rise and `outline`, rendered by the shared widget so both
+  engines match; outlined captions drop the box by default; pages keep names and compounds together; `translations`
+  adds a caller-written line in another language under the spoken words.
+- Flash shots: a picture visible for under 0.3 s between two cuts (B-roll in/out included) is flagged by
+  `audit_timeline` (`flash_shot`) and `shortform_audit` (`flash_cut`); `punch_in` never lands under or beside a
+  full-frame B-roll.
+- Talking heads: `reframe_footage` `auto_focus: faces`; `condense_dialogue` `windows` + `transcript`; `punch_in`
+  `ladder` changes the framing at every cut in one take and caps the zoom by source resolution.
+- `design_sound` `beat`: a 60-180 BPM bed (TikTok reports >120 BPM music with higher view-through) with its beat times.
+- Evidence, templates and limits: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#tiktok-craft-evidence-tools-and-limits).
+
+## 25. Effect combinations by genre, many sources
+
+- Choose material across many clips with `rank_clips`: windows ranked by motion, local action, sharpness and colour,
+  each with its action peak (absolute source seconds) and motion direction; cross-clip match cuts (never two moments
+  of one take); which clips are silent; a contact sheet. Look at the sheet: a peak is measured movement (a
+  spectator's hand counts), not the moment that matters.
+- Land accents on the music with `accent_sync(style)`: velocity, travel, food, product or nature (none). Drops are
+  music-file seconds (default: loud peak entries); one stacked hit per drop (white flash, decaying shake, RGB split
+  + impact/riser), a flash or light leak per phrase, a punch at most once per bar; re-runs replace.
+- Slow motion on the action: `retime_footage` `peaks` (source seconds) slowed to `peak_speed` for `hold_s` with S-curve
+  `ramp_s`, flow-interpolated; place the result at 1x. Hold a moment with patch `freeze_frame` (a flash and a punch-in
+  on the still, the shot's look kept on every part); a freeze shot needs only its one source frame, so it can hold a
+  clip's last frame.
+- Stacks in one call: patch `apply_combo` (e.g. `impact_title` on a title). Two clips at once: `compose_edit`
+  `split_screen` (rows in 9:16, columns in 16:9, grid for four). Recipe cards fade out as they fade in.
+- Mute nature footage: `design_sound` `forest` / `rain` beds (<= 60 s, synthesized; say so in the credits), the
+  ambience leading the picture cut (J-cut) and trailing it (L-cut).
+- Templates: `professional_toolkit(platform=tiktok)` sports_velocity, nature_doc, food_short, city_montage.
+- Check text against the footage: `audit_timeline` `low_contrast_plate` measures unplated, unoutlined text against
+  the source frame under it (any aspect ratio); text on a plate is inset and centred by both engines.
+- Evidence, the music hierarchy, the four builds and their lessons: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#effect-combinations-by-genre-evidence-tools-and-limits).
+
+## 26. Seeing what is in the frame; archival, science and product films
+
+- `find_subjects` (offline OWLv2 + SigLIP, installed once with `allow_download` after the user agrees): `queries`
+  ["rally car"] give per clip spans, share and the best view {at, score, box, area}; `best.box` seeds `track_subject`.
+  `text` or `image` {path, at} rank windows by similarity. Boxes are source-frame shares: map them with
+  `semantic.to_canvas` through the shot's fit and focus before placing anything (a 4:3 photo framed 16:9 moves them).
+- `rank_clips(subject=...)` ranks by the subject's presence and size and reports `subject.at`, its clearest view.
+- `compose_edit lower_third` `avoid: "gorilla"` takes the side clear of the detected subject.
+- Archival stills: aim each 5-8 % move (`focus_zoom` amount and focus point) at the detected subject; crop a scan to
+  its detected postcard or print (`focus_zoom` cut to fill); orient with the map, its zoom's fixed point on the feature,
+  a `tracked_callout` on it. TIFF scans and images over 40 MP import as JPEG working copies with their credit.
+- Vertical from wide renders (science, product, space): `find_subjects(queries, frame_for="vertical")` returns per
+  subject a shot framing (`fit`, focus, a held `focus_zoom` and the subject's canvas box) that keeps it whole; in code
+  `semantic.frame_subject(box, sw, sh, cw, ch, region=...)` keeps it inside the area the titles leave free
+  (`inside_region: false` when no framing can: move the titles instead). A subject
+  wider than a 9:16 crop is framed up from contain (zooming a shot out never shows more of its source); set the
+  timeline's `design.background` to the footage's black so the bands disappear (`create_silent_project` uses its colour).
+  Try a second query when one misses ("space telescope" missed the sunshield view, "spacecraft" found it).
+- Product reveals: `compose_product reveal: "dark"` (rim light first, key light at `reveal_at`, fog on the floor, slow
+  orbit); the camera fits the layer's aspect, so 9:16 works; `.gltf` models pack with `media.pack_gltf`.
+- Pictures import as they are shown: old transfers with non-square pixels (PAL 720x576 shows 4:3), rotated phone video
+  and EXIF-rotated photos become upright square-pixel working copies; sources with dropped frames render from a
+  constant-rate proxy.
+- Off-speed shots (any `playback_rate` other than 1) play a pre-timed 30 fps clip in both engines, frame-identical.
+- Evidence and limits: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#seeing-what-is-in-the-frame-archival-science-and-product-films).
+
+## 27. Learning a film and making one like it; the picture first
+
+- Learn: `learn register` the exemplar (local copy, its licence in `usage`), `anatomy` its parts, `evidence` to look,
+  `distill` a blueprint whose targets the exemplar measured, then build, render and `learn conform` the render. The
+  conformance number counts targets in range; read the misses and the features behind them, not the score (the first
+  rebuild and a far better one both scored 0.786).
+- Choose footage by picture before content: `rank_clips(min_look="B")` or `editvideo.look.measure(path, start, end)`
+  per window. A C is upscaled (source smaller than the canvas), shaky (> 4 px per 1/15 s after smooth camera moves are
+  removed) or noisy; noise is read spatially (flat pixels) and temporally (two aligned consecutive frames, which also
+  reads night and textured footage); `noise: None` with the flag `noise unmeasured` means neither could look (a still
+  of pure texture, a cut) and caps the grade at B.
+- Before rendering, read `audit_timeline` for `repeated_picture` / `repeated_source` (a few clips on a loop; the same
+  scene shown again from another moment counts, by ORB features, not only the same picture), `off_cadence_footage`
+  (24/25/50 fps at 1x: set `frame_sampling: "flow"` on shots with camera movement; it renders slower, about 2 frames a
+  second per window, cached; where a fast foreground or occlusion would ghost, the render measures it and takes the
+  nearest source frame instead, logging the shot) and `matte_cuts_subject` (a letterbox bar across a face or a
+  medium shot's head). With too little material, cut fewer, longer shots rather than reuse.
+- Brands: ask `find_subjects` for "a brand logo" and "a soft drink advertisement sign" (scores around .15-.35) and
+  skip those windows; a sign in every frame rules the clip out.
+- Grade toward the exemplar per shot (saturation up to x1.35 where a shot is short of the target, nothing where it is
+  already there); let the light fall at dusk (brightness about .88) and leave night alone.
+- A selection script that applies all of this slot by slot: `examples/round12/build_travel_v4.py`.
+- Evidence and limits: [SHORTFORM_AND_FILM_RESEARCH.md](SHORTFORM_AND_FILM_RESEARCH.md#learning-from-a-film-and-making-one-like-it).

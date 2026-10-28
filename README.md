@@ -8,6 +8,17 @@ It is not a video editor for people and has no studio UI. The calling model make
 the runtime executes them deterministically and returns evidence (frames, crops, audio, numbers). There is no hidden
 beauty score and no approval gate. Tiếng Việt: [README.vi.md](README.vi.md).
 
+## Start here
+
+- **Try it:** [INSTALL.md](INSTALL.md), then `python scripts/demo.py --render`, then [docs/SPEC.md](docs/SPEC.md) for
+  what the parts are.
+- **From an AI host:** there is no need to load 137 tool schemas or the docs. `editvideo_bootstrap(task)` returns the
+  few tools and the one guide a task needs; `editvideo_discover_tools(query, include_schema=true)` gives exact schemas
+  on demand; `EDITVIDEO_TOOLSET=compact` exposes 7 entry tools to small-context hosts.
+- **Find a guide:** [docs/README.md](docs/README.md) lists the guides by task. Names like "round 6" in older pages and
+  test files record how the system was built; you do not need them.
+- **Contribute:** [CONTRIBUTING.md](CONTRIBUTING.md).
+
 <!-- counts below come from scripts/repo_facts.py; tests/test_round6.py keeps them honest -->
 **v0.8.0 + unreleased upgrades:** 137 MCP tools · 95 runnable effects (each with a before/after preview strip in both engines) +
 7 tested combos · 18 layer kinds · 17 explainer recipes + 4 title recipes · 16 Vietnamese-complete font families ·
@@ -32,8 +43,15 @@ exposes 7 entry tools for small-context hosts. See [docs/AI_ERGONOMICS.md](docs/
 
 ## Demo
 
-Three short archive films built end to end by the system from public-domain material (720p previews; credits in
-[docs/demo](docs/demo/README.md)):
+[![EditVideo Agent in 89 seconds](docs/demo/editvideo-reel.jpg)](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)
+
+**[EditVideo Agent in 89 seconds](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)** (1080p, 51 MB, from the release page; a small
+[720p preview](docs/demo/editvideo-reel-720p.mp4) is in the repository): the tools at work, full frame. It
+finds and follows a subject, cuts to music, explains with 3D and motion graphics, renders 3D, grades colour, builds
+history from the archive and checks its own work. Each chapter names the MCP tools that made it; the footage is real
+and credited. Chapter by chapter: [docs/demo](docs/demo/README.md).
+
+Three short archive films built end to end by the system from public-domain material (720p previews):
 
 | [![Leo thang](docs/demo/leo-thang.jpg)](docs/demo/leo-thang-720p.mp4) | [![Lan rộng](docs/demo/lan-rong.jpg)](docs/demo/lan-rong-720p.mp4) | [![Vịnh Bắc Bộ](docs/demo/vinh-bac-bo.jpg)](docs/demo/vinh-bac-bo-720p.mp4) |
 |---|---|---|
@@ -97,7 +115,7 @@ assets.
 
 ## Documentation
 
-[Install](INSTALL.md) · [Specification](docs/SPEC.md) · [Demo films](docs/demo/README.md) · [Pro workflows](docs/PRO_WORKFLOWS.md) · [Explainer kit](docs/EXPLAINER_KIT.md) · [Colour, depth & 3D](docs/COLOR_DEPTH_3D.md) ·
+[Install](INSTALL.md) · [Documentation map](docs/README.md) · [Specification](docs/SPEC.md) · [Demo films](docs/demo/README.md) · [Pro workflows](docs/PRO_WORKFLOWS.md) · [Explainer kit](docs/EXPLAINER_KIT.md) · [Colour, depth & 3D](docs/COLOR_DEPTH_3D.md) ·
 [Design library](docs/DESIGN_LIBRARY.md) · [Model integration](docs/MODEL_INTEGRATION.md) · [AI ergonomics](docs/AI_ERGONOMICS.md) ·
 [Review rubric](docs/REVIEW_RUBRIC.md) · [Learning from references](docs/LEARNING_FROM_REFERENCES.md) · [Changelog](CHANGELOG.md) ·
 [Contributing](CONTRIBUTING.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md)

@@ -572,3 +572,52 @@ def test_a_silent_project_is_not_blocked_by_its_own_silence(tmp_path, monkeypatc
     L = ledger.project_ledger(p["id"], "online", write=False)
     assert L["verdict"] == "clear", [(r["name"], r["class"]) for r in L["rows"]]
     assert not resources.project_credits(p["id"])["unrecorded_assets"]
+
+
+def test_a_render_of_another_project_carries_its_works(tmp_path, monkeypatch):
+    """A film nested in another (a beat-cut montage in a reel) brings each work its picture is made of, and the reel counts
+    each work once; the nested film's music is not the reel's when the reel plays it silent. (Registered as one file
+    under one licence, the reel's montage of six reels by two authors had credited one of them.)"""
+    import subprocess
+    from PIL import Image
+    from editvideo import agent, ledger, media, resources, store
+    monkeypatch.setattr(store, "DATA", tmp_path / "data")
+    monkeypatch.setattr(resources, "CATALOG", tmp_path / "catalog.json")
+    store.initialize()
+    src = tmp_path / "src"
+    src.mkdir()
+    a, b, song, render = src / "a.png", src / "b.png", src / "song.wav", src / "nested.mp4"
+    Image.new("RGB", (320, 180), (90, 60, 40)).save(a)
+    Image.new("RGB", (320, 180), (40, 60, 90)).save(b)
+    subprocess.run([media.FFMPEG, "-v", "error", "-y", "-f", "lavfi", "-i", "sine=f=440:d=2", str(song)], check=True)
+    subprocess.run([media.FFMPEG, "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=gray:s=320x180:d=2:r=30", "-pix_fmt", "yuv420p", str(render)], check=True)
+    ledger.register_source(a, "CC BY 4.0", "Alice", "https://example.org/a", "Harbour", kind="image")
+    ledger.register_source(b, "Public domain", "NARA", "https://example.org/b", "Landing", kind="image")
+    ledger.register_source(song, "CC BY 4.0", "Bob", "https://example.org/song", "Theme", kind="audio")
+
+    def imp(pid, path, role="evidence"):
+        return agent.import_media(pid, str(path), path.stem, role, True, agent.read(pid)["revision"])["asset"]["id"]
+    inner = agent.create_silent("landscape", 60, "remotion", "inner", color="#000000")["id"]
+    ia, ib, isong = imp(inner, a), imp(inner, b), imp(inner, song, "decoration")
+    img = lambda id_, aid, z: {"id": id_, "kind": "image", "asset_id": aid, "start_frame": 0, "end_frame": 60, "x": 0, "y": 0, "width": 1, "height": 1,
+                               "z": z, "fit": "cover"}
+    t = agent.read(inner)["timeline"]
+    t["layers"] = [img("a", ia, 10), img("b", ib, 11)]
+    t["audio_clips"] = [{"id": "m", "asset_id": isong, "start_frame": 0, "end_frame": 60, "source_start": 0.0, "volume": 1.0, "role": "music"}]
+    agent.patch(inner, agent.read(inner)["revision"], [{"op": "replace_timeline", "timeline": t}])
+    entry = ledger.register_project_render(render, inner, "Inner film")
+    assert {p["credit"] for p in entry["parts"]} >= {"Alice", "NARA", "Bob"}
+
+    outer = agent.create_silent("landscape", 60, "remotion", "outer", color="#000000")["id"]
+    vid, oa = imp(outer, render), imp(outer, a)
+    vlayer = {"id": "film", "kind": "video", "asset_id": vid, "start_frame": 0, "end_frame": 60, "x": 0, "y": 0, "width": 1, "height": 1, "z": 10,
+              "fit": "cover", "source_start": 0.0, "playback_rate": 1}
+    agent.patch(outer, agent.read(outer)["revision"], [{"op": "upsert_layer", "layer": vlayer}, {"op": "upsert_layer", "layer": img("again", oa, 12)}])
+    led = ledger.project_ledger(outer, "online", write=False)
+    credits = [w["credit"] for w in led["works"]]
+    assert credits.count("Alice") == 1 and "NARA" in credits and "Bob" not in credits  # the reel plays the film's picture only
+    assert led["work_count"] == len(led["works"]) and led["verdict"] == "clear"
+    row = next(r for r in led["rows"] if r["asset"] == vid)
+    assert {w["credit"] for w in row["works"]} >= {"Alice", "NARA"} and ledger.classes(row["license"]) == {"open", "public_domain"}
+    lines = {c["credit"] for c in resources.project_credits(outer)["credits"]}
+    assert {"Alice", "NARA"} <= lines and "Bob" not in lines

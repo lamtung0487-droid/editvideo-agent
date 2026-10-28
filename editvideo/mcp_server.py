@@ -779,13 +779,16 @@ def editvideo_shortform_audit(path: str | None = None, project_id: str | None = 
 
 
 @mcp.tool(annotations=READ)
-def editvideo_motion_audit(path: str, start: float = 0, end: float | None = None, project_id: str | None = None, series: bool = False) -> dict[str, Any]:
-    """Read an encoded video (render/preview/source) for what viewers feel as motion: near-static spans, duplicated frames inside motion (24/25p cadence, missed frames), periodic judder, brightness jumps, and with project_id per-shot motion energy and calm shots relative to the film. Low-passed so grain/encoder noise do not count. Measurements with thresholds, not a verdict."""
-    from . import review
+def editvideo_motion_audit(path: str, start: float = 0, end: float | None = None, project_id: str | None = None, series: bool = False,
+                           gates: bool = False) -> dict[str, Any]:
+    """Read an encoded video (render/preview/source) for felt motion: near-static spans, duplicated frames (24/25p cadence, missed frames), judder, brightness jumps; with project_id per-shot motion energy and calm shots. Low-passed (grain ignored). gates=true adds delivery gates: legal levels, flashes, banding, stills, blacks, text contrast/holds. Measurements with thresholds, not a verdict."""
+    from . import agent, review
     r = review.motion_audit(path, start, end, project_id)
     if not series:  # per-frame series cost tokens; findings + per-shot speed are usually enough
         r.pop("diff_series", None)
         r.pop("speed_series", None)
+    if gates:  # the gates read the whole file; with the project, text holds and contrast are read from its timeline
+        r["delivery_gates"] = review.delivery_gates(path, agent.read(project_id)["timeline"] if project_id else None)
     return r
 
 
@@ -1459,11 +1462,24 @@ def configure_toolset(mode='full'):
     mcp._tool_manager._tools={k:v for k,v in TOOL_REGISTRY.items() if mode=='full' or k in names}
 
 
+def keep_stdin_for_transport():
+    """FFmpeg reads keyboard commands from its stdin. A child that inherits the MCP pipe can block on it or take a
+    client's message (FFmpeg 6.1 hung read_audio_events this way). The transport keeps a private copy of the pipe;
+    every child process (FFmpeg, Node, Blender) gets the null device as its stdin."""
+    import io, os, sys
+    private = os.dup(0)
+    null = os.open(os.devnull, os.O_RDONLY)
+    os.dup2(null, 0)  # on Windows this also sets the process's standard input handle, which subprocess hands down
+    os.close(null)
+    sys.stdin = io.TextIOWrapper(io.BufferedReader(io.FileIO(private, "rb")), encoding="utf-8")
+
+
 def main():
     # Multiple MCP clients share the database. Starting a client must never cancel another client's jobs.
     store.initialize(recover=False)
     import os
     configure_toolset(os.environ.get('EDITVIDEO_TOOLSET','full'))
+    keep_stdin_for_transport()
     worker.start()
     try:
         mcp.run(transport="stdio")

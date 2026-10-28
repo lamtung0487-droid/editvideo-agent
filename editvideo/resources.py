@@ -57,8 +57,9 @@ def _save(entries):
     _atomic(CATALOG, json.dumps(entries, ensure_ascii=False, indent=1))
 
 
-def register_resource(path, kind, title, license, credit, source_url="", tags="", notes="", provider="local"):
-    """Add or refresh one library entry for a file inside the project data folder."""
+def register_resource(path, kind, title, license, credit, source_url="", tags="", notes="", provider="local", parts=None):
+    """Add or refresh one library entry for a file inside the project data folder. parts: the works a render is made of
+    (ledger.register_render, register_project_render), each {title, license, credit, source_url, used}."""
     p = Path(path).resolve()
     if not p.is_file():
         raise ValueError(f"No such file: {p}")
@@ -74,6 +75,8 @@ def register_resource(path, kind, title, license, credit, source_url="", tags=""
     entry = {"id": re.sub(r"[^a-z0-9]+", "-", Path(rel).stem.lower()).strip("-")[:60], "path": rel, "kind": kind, "title": title,
              "license": license, "credit": credit, "source_url": source_url, "provider": provider, "tags": tags, "notes": notes,
              "bytes": p.stat().st_size, "sha256": _sha(p)}
+    if parts:
+        entry["parts"] = parts
     if kind in ("texture", "image"):
         try:
             from PIL import Image
@@ -636,6 +639,8 @@ def project_credits(pid):
     cfg = store.get_project(pid).get("config") or {}
     used.update(cfg[k] for k in ("music_id", "narration_id") if cfg.get(k))  # the voice track is credited like any sound
     procedural = {store.read_json(f).get("sha256") for f in (store.DATA / "sound-design").glob("*/sound.json")}  # EditVideo's own synthesis
+    from .ledger import _uses
+    spans = _uses(t)
     index = _Index()
     lines, missing, traced, sources = {}, [], [], {}
     for aid in sorted(used):
@@ -648,10 +653,14 @@ def project_credits(pid):
             continue
         e, chain = trace_origin(a, index)
         if e:
-            lines.setdefault((e["credit"], e["license"]), []).append(e["title"])
-            if e.get("source_url"):
-                sources.setdefault((e["credit"], e["license"]), set()).add(e["source_url"])
-            traced.append({"asset": aid, "name": a.get("name"), "origin": e["id"], "via": chain})
+            # a render of other works (ledger.register_render / register_project_render) credits each work in the part of
+            # it the timeline uses: a nested film's picture, not its muted music
+            took = {"audio" if w.startswith(("audio", "project music")) else "picture" for *_, w in spans.get(aid, [])} or {"picture", "audio"}
+            for w in [p for p in e.get("parts") or [] if set(p.get("used") or took) & took] or [e]:
+                lines.setdefault((w["credit"], w["license"]), []).append(w["title"])
+                if w.get("source_url"):
+                    sources.setdefault((w["credit"], w["license"]), set()).add(w["source_url"])
+            traced.append({"asset": aid, "name": a.get("name"), "origin": e["id"], "via": chain, **({"works": len(e["parts"])} if e.get("parts") else {})})
         else:
             missing.append({"asset": aid, "name": a.get("name"), "tags": a.get("tags"), "via": chain})
     index.save()

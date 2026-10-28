@@ -29,6 +29,19 @@ def ffmpeg_major():
     return _FFMPEG_MAJOR[0]
 
 
+_FFMPEG_FILTERS = []
+
+
+def has_filter(name):
+    """Is this filter built into the FFmpeg in use? Builds differ: Ubuntu's and Debian's packages have no libvmaf."""
+    if not _FFMPEG_FILTERS:
+        try:
+            _FFMPEG_FILTERS.append(subprocess.run([FFMPEG, "-hide_banner", "-filters"], capture_output=True, text=True, timeout=30).stdout)
+        except Exception:
+            _FFMPEG_FILTERS.append("")
+    return re.search(rf"\s{re.escape(name)}\s", _FFMPEG_FILTERS[0]) is not None
+
+
 def filter_complex_args(graph, work, name="filter.txt", inline_limit=6000):
     """-filter_complex for a short graph; a long one (a documentary mix of ~70 clips ran past Windows' 32 767-character
     command line) is written to a file in `work` and passed by name (-/filter_complex on FFmpeg 7+, else
@@ -57,7 +70,7 @@ def command(args, cwd=None, log=None, cancelled=None, timeout=1800, env=None, do
     sink = Path(log).open("a+b") if log else tempfile.TemporaryFile()  # read back below: append mode alone cannot read
     with sink as output:
         start_at = output.tell()
-        proc = subprocess.Popen([str(x) for x in args], cwd=cwd, env=env, stdout=output, stderr=subprocess.STDOUT,
+        proc = subprocess.Popen([str(x) for x in args], cwd=cwd, env=env, stdin=subprocess.DEVNULL, stdout=output, stderr=subprocess.STDOUT,
                                 creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         started = asked = time.monotonic()
         try:

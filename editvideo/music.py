@@ -935,25 +935,30 @@ def snap_cuts(pid, base_revision, music_path=None, beat_times=None, use="beats",
     if beat_times is None:
         if not music_path:
             raise ValueError("Pass music_path or beat_times")
-        st = structure(music_path, music_start, bpm_range=bpm_range)
+        # the whole track, as music_structure reads it: analysed from music_start the same bed came out at 133 BPM where
+        # music_structure said 200, and a reel cut to one grid while drawing the other
+        st = structure(music_path, 0.0, bpm_range=bpm_range)
         info = {k: st[k] for k in ("bpm", "beat_period_s", "periodicity", "tempo_clarity", "pulse", "recommended_snap", "alternatives_bpm")}
+        info["analysis"] = "whole track (the grid music_structure returns)"
         bt, bib = st["beats"], st["beat_in_bar"]
     else:
         if use in ("priority", "hits", "phrases"):
             raise ValueError(f"use={use} needs music_path (bars, hits and sections come from the analysis)")
         bt, bib = list(beat_times), [0] * len(beat_times)
+    # (timeline frame, weight, music seconds): the target's time travels with each move, so a picture can draw the grid
+    # the cuts went to
     if use == "beats":
-        grid = [(to_f(b), 1.0) for b in bt]
+        grid = [(to_f(b), 1.0, b) for b in bt]
     elif use == "downbeats":
-        grid = [(to_f(b), 1.0) for b in (st["downbeats"] if st else bt)]
+        grid = [(to_f(b), 1.0, b) for b in (st["downbeats"] if st else bt)]
     elif use == "priority":
-        grid = [(to_f(b), {0: 1.0, 2: .7}.get(k, .4)) for b, k in zip(bt, bib)]
+        grid = [(to_f(b), {0: 1.0, 2: .7}.get(k, .4), b) for b, k in zip(bt, bib)]
     elif use == "against":
-        grid = [(to_f((x + y) / 2), 1.0) for x, y in zip(bt, bt[1:])]
+        grid = [(to_f((x + y) / 2), 1.0, (x + y) / 2) for x, y in zip(bt, bt[1:])]
     elif use == "hits":
-        grid = [(to_f(h["time"]), 1.0) for h in st["hits"]] + [(to_f(s_["start"]), .9) for s_ in st["sections"][1:]]
+        grid = [(to_f(h["time"]), 1.0, h["time"]) for h in st["hits"]] + [(to_f(s_["start"]), .9, s_["start"]) for s_ in st["sections"][1:]]
     else:
-        grid = [(to_f(x), .8) for x in st["phrases_4"]] + [(to_f(s_["start"]), 1.0) for s_ in st["sections"][1:]]
+        grid = [(to_f(x), .8, x) for x in st["phrases_4"]] + [(to_f(s_["start"]), 1.0, s_["start"]) for s_ in st["sections"][1:]]
     prot = [tuple(r) for r in (protect or [])]
     if any(len(r) != 2 or r[0] >= r[1] for r in prot):
         raise ValueError("protect ranges are [start_frame, end_frame)")
@@ -965,19 +970,19 @@ def snap_cuts(pid, base_revision, music_path=None, beat_times=None, use="beats",
         if inside(cut):
             skipped.append({"after_shot": shots[i]["id"], "cut": cut, "reason": "protected range"})
             continue
-        cands = [(w - .6 * abs(g - cut) / tolerance_frames, -abs(g - cut), g, w) for g, w in grid if abs(g - cut) <= tolerance_frames and not inside(g)]
+        cands = [(w - .6 * abs(g - cut) / tolerance_frames, -abs(g - cut), g, w, tm) for g, w, tm in grid if abs(g - cut) <= tolerance_frames and not inside(g)]
         if not cands:
             near = min(grid, key=lambda gw: abs(gw[0] - cut))[0] if grid else None
             if near is not None:
                 skipped.append({"after_shot": shots[i]["id"], "cut": cut, "nearest_target_frame": near, "reason": "outside tolerance"})
             continue
-        _, _, near, w = max(cands)
+        _, _, near, w, tm = max(cands)
         if near == cut:
             continue
         if not shots[i]["start_frame"] + 6 < near < shots[i + 1]["end_frame"] - 6:
             skipped.append({"after_shot": shots[i]["id"], "cut": cut, "nearest_target_frame": near, "reason": "would make a shot shorter than 6 frames"})
             continue
-        plan.append({"after_shot": shots[i]["id"], "from": cut, "to": near, "delta": near - cut, "weight": w})
+        plan.append({"after_shot": shots[i]["id"], "from": cut, "to": near, "delta": near - cut, "weight": w, "music_s": round(float(tm), 3)})
     moved, rev = [], base_revision
     if not dry_run:
         for mv in plan:
@@ -988,7 +993,7 @@ def snap_cuts(pid, base_revision, music_path=None, beat_times=None, use="beats",
                 skipped.append({**mv, "reason": str(e)[:160]})
     final = {mv["after_shot"]: mv["to"] for mv in (plan if dry_run else moved)}
     cuts = [final.get(s_["id"], s_["end_frame"]) for s_ in shots[:-1]]
-    on_grid = sum(1 for c in cuts if any(abs(g - c) <= 1 for g, _ in grid))
+    on_grid = sum(1 for c in cuts if any(abs(g - c) <= 1 for g, *_ in grid))
     missing = []
     if st:
         end_f = shots[-1]["end_frame"] if shots else 0
@@ -996,8 +1001,10 @@ def snap_cuts(pid, base_revision, music_path=None, beat_times=None, use="beats",
             f0 = to_f(s_["start"])
             if 0 < f0 < end_f and not any(abs(c - f0) <= 2 for c in cuts):
                 missing.append({"section": s_["label"], "time": s_["start"], "frame": f0, "entry_step_db": s_["entry_step_db"]})
+    end_f = shots[-1]["end_frame"] if shots else 0
     return {"revision": None if dry_run else rev, "planned": plan, "moved": moved if not dry_run else [], "skipped": skipped,
             "cuts_on_target": on_grid, "cuts": len(cuts), "section_entries_without_cut": missing, "beat_info": info,
+            "targets": [{"frame": g, "music_s": round(float(tm), 3), "weight": w} for g, w, tm in sorted(grid) if 0 <= g <= end_f + lead_frames][:400],
             "note": "Cut on the beat for energy, against it for tension; with a weak pulse cut to hits and section entries. "
                     "lead_frames=1-2 lands the picture change just before the hit. Section entries without a cut are the strongest "
                     "places to add one. Inspect each moved cut for action continuity (motion_audit / cut_audit)."}

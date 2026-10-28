@@ -268,8 +268,8 @@ def test_frozen_time_is_measured_on_the_picture(tmp_path):
     import subprocess
     from editvideo.media import FFMPEG
     clip = tmp_path / "freeze.mp4"
-    subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "lavfi", "-i", "testsrc2=s=320x180:r=30:d=2", "-filter_complex",
-                    "[0]split[a][b];[b]trim=start_frame=59:end_frame=60,setpts=PTS-STARTPTS,loop=59:1:0[c];[a][c]concat=n=2:v=1:a=0",
+    # the last frame held by tpad on the 30 fps grid (a loop filter's held frames were all dropped by FFmpeg 7.1)
+    subprocess.run([FFMPEG, "-v", "error", "-y", "-f", "lavfi", "-i", "testsrc2=s=320x180:r=30:d=2", "-vf", "tpad=stop_mode=clone:stop_duration=2,fps=30",
                     "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", str(clip)], check=True)
     r = review.frozen_share(clip)
     assert .4 < r["share"] < .6 and r["runs"] == 1
