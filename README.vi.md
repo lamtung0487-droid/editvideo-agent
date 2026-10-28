@@ -8,6 +8,8 @@ hay HyperFrames, rồi *kiểm* kết quả bằng phép đo và lặp lại.
 thẩm mỹ; runtime thực thi xác định và trả về bằng chứng (frame, crop, âm thanh, con số). Không có điểm "đẹp" ẩn, không
 có cổng duyệt. English: [README.md](README.md).
 
+[![EditVideo Agent trong 89 giây](docs/demo/editvideo-reel.gif)](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)
+
 ## Bắt đầu từ đây
 
 - **Dùng thử:** [INSTALL.vi.md](INSTALL.vi.md), rồi `python scripts/demo.py --render`, rồi đọc
@@ -54,8 +56,6 @@ kiểm · 18 loại layer · 17 recipe explainer + 4 recipe tiêu đề · 16 h�
 gói ảnh chỉ kèm evidence id. `EDITVIDEO_TOOLSET=compact` chỉ mở 7 tool đầu vào.
 
 ## Phim demo
-
-[![EditVideo Agent trong 89 giây](docs/demo/editvideo-reel.jpg)](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)
 
 **[EditVideo Agent trong 89 giây](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)** (1080p, 51 MB, tải từ trang Release; bản
 [xem nhanh 720p](docs/demo/editvideo-reel-720p.mp4) nằm trong repo): các công cụ làm việc trên toàn khung hình.

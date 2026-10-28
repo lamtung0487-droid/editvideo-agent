@@ -3,7 +3,7 @@
 ## The capability reel
 
 [**EditVideo Agent in 89 seconds**](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4) (1080p, 51 MB, on the release page; [720p preview](editvideo-reel-720p.mp4),
-[poster](editvideo-reel.jpg)) shows the tools at work:
+[poster](editvideo-reel.jpg), [8-second GIF](editvideo-reel.gif)) shows the tools at work:
 each chapter puts on screen what a tool did, full frame, before and after. The footage is real and credited
 ([full credits](editvideo-reel-CREDITS.md)). The tool names on screen are the MCP tools that made each picture.
 

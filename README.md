@@ -8,6 +8,8 @@ It is not a video editor for people and has no studio UI. The calling model make
 the runtime executes them deterministically and returns evidence (frames, crops, audio, numbers). There is no hidden
 beauty score and no approval gate. Tiếng Việt: [README.vi.md](README.vi.md).
 
+[![EditVideo Agent in 89 seconds](docs/demo/editvideo-reel.gif)](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)
+
 ## Start here
 
 - **Try it:** [INSTALL.md](INSTALL.md), then `python scripts/demo.py --render`, then [docs/SPEC.md](docs/SPEC.md) for
@@ -42,8 +44,6 @@ manifests) instead of dumps, and image packets whose text carries only evidence 
 exposes 7 entry tools for small-context hosts. See [docs/AI_ERGONOMICS.md](docs/AI_ERGONOMICS.md).
 
 ## Demo
-
-[![EditVideo Agent in 89 seconds](docs/demo/editvideo-reel.jpg)](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)
 
 **[EditVideo Agent in 89 seconds](https://github.com/lamtung0487-droid/editvideo-agent/releases/download/demo-reel-v2/editvideo-reel-1080p.mp4)** (1080p, 51 MB, from the release page; a small
 [720p preview](docs/demo/editvideo-reel-720p.mp4) is in the repository): the tools at work, full frame. It
