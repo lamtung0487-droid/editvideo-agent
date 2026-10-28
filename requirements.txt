@@ -1,0 +1,14 @@
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+python-multipart>=0.0.18,<1
+pillow>=10.4,<13
+fonttools>=4.66,<5
+httpx>=0.27,<1
+edge-tts>=7.2,<8
+mcp>=1.26,<2
+numpy>=2,<3
+faster-whisper>=1.2,<2
+opencv-python-headless>=4.12,<5
+filelock>=3,<5
+pywin32>=312; sys_platform == "win32"
+scipy>=1.11,<2

@@ -1,0 +1,35 @@
+{
+ "entries": [
+  {
+   "id": "identity",
+   "path": "assets/previews/lut/identity.jpg",
+   "lut_sha256": "bcfc623ea0a5c7c618265474cd6a78618ca0e33981920cbbb1a471c9eca40e0f"
+  },
+  {
+   "id": "documentary",
+   "path": "assets/previews/lut/documentary.jpg",
+   "lut_sha256": "ed22dd470b43616a0241a289f79018663faf8c05c01fb61954b1560e89a5aadb"
+  },
+  {
+   "id": "warm_story",
+   "path": "assets/previews/lut/warm_story.jpg",
+   "lut_sha256": "d6d1d9f5b7a5a1924a9aa87777b2180dbc6533eb60f313e9bb885b7969e09360"
+  },
+  {
+   "id": "cool_science",
+   "path": "assets/previews/lut/cool_science.jpg",
+   "lut_sha256": "dce15fd69bc69497832b7794e8579c96faac07f05b7e0e2c27299bb9f5c238f7"
+  },
+  {
+   "id": "forest",
+   "path": "assets/previews/lut/forest.jpg",
+   "lut_sha256": "1b6adc9f979b87836751686b8f9634482e51553d992e77ed32c3ff8417e31491"
+  },
+  {
+   "id": "monochrome",
+   "path": "assets/previews/lut/monochrome.jpg",
+   "lut_sha256": "bef2d714b42bd773c8aca819bdd02217fe16a0adfdc7e88bb405a2c9ae31c400"
+  }
+ ],
+ "scope": "Actual6 original display-domain LUTs applied through FFmpeg. Illustrative generated forest, not natural footage/colorchart calibration. Strength100% for comparison, choose restrained strength for authored scenes."
+}

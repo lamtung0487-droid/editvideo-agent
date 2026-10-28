@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "editvideo": {
+      "type": "stdio",
+      "command": "<absolute path to venv python>",
+      "args": [
+        "<absolute path to run.py>"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "EDITVIDEO_TOOLSET": "compact"
+      }
+    }
+  }
+}

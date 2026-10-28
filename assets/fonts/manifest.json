@@ -1,0 +1,535 @@
+{
+  "upstream": "google/fonts",
+  "revision": "bd8f81ddb5c74d5c8897b36ad88b440266245103",
+  "coverage_sample": "Tiếng Việt: Nguyễn Ánh, Trường học, kỹ thuật, dữ liệu, Ắ Ằ Ẳ Ẵ Ặ Ấ Ầ Ẩ Ẫ Ậ Ế Ề Ể Ễ Ệ Ố Ồ Ổ Ỗ Ộ Ớ Ờ Ở Ỡ Ợ Ứ Ừ Ử Ữ Ự Đ đ Ỳ Ỵ Ỷ Ỹ 0123456789",
+  "normalization": "NFC; this is a Vietnamese probe, not exhaustive Unicode coverage",
+  "fonts": [
+    {
+      "id": "bevietnampro",
+      "family": "Be Vietnam Pro",
+      "category": "sans",
+      "use": "Vietnamese narration, captions, contemporary knowledge",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "bevietnampro/OFL.txt",
+      "license_sha256": "6b7f8f73609a25ea78c891e34cf37b06f8a676b7ea986e941e43b009110f2a85",
+      "faces": [
+        {
+          "file": "bevietnampro/BeVietnamPro-Bold.ttf",
+          "sha256": "7f738fe5c43c8872807b20e2d30d42163618de8a4daf7f48a939adac32c16847",
+          "bytes": 140300,
+          "weight": "700",
+          "style": "normal",
+          "axes": {},
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/bevietnampro/BeVietnamPro-Bold.ttf",
+          "vietnamese_nfc_missing": []
+        },
+        {
+          "file": "bevietnampro/BeVietnamPro-Regular.ttf",
+          "sha256": "cd1ef6e9d7db28ad5cdb88a65ccbe693870e60d340b791f349d248342b4fe4c3",
+          "bytes": 132948,
+          "weight": "400",
+          "style": "normal",
+          "axes": {},
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/bevietnampro/BeVietnamPro-Regular.ttf",
+          "vietnamese_nfc_missing": []
+        },
+        {
+          "file": "bevietnampro/BeVietnamPro-SemiBold.ttf",
+          "sha256": "bd8e27eb02720b9d91e59e4f10a90878643219f25ce6a8d9a4f06a8a88d3bb71",
+          "bytes": 136736,
+          "weight": "600",
+          "style": "normal",
+          "axes": {},
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/bevietnampro/BeVietnamPro-SemiBold.ttf",
+          "vietnamese_nfc_missing": []
+        },
+        {
+          "file": "bevietnampro/BeVietnamPro-Italic.ttf",
+          "sha256": "a33ebb3f68e0e260a7d3874d64259ad309971a2daf969e7ce5f444d70bce535f",
+          "bytes": 137244,
+          "weight": "400",
+          "style": "italic",
+          "axes": {},
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/bevietnampro/BeVietnamPro-Italic.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "notosans",
+      "family": "Noto Sans",
+      "category": "sans",
+      "use": "Dense explanations, multilingual captions",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "notosans/OFL.txt",
+      "license_sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "faces": [
+        {
+          "file": "notosans/NotoSans[wdth,wght].ttf",
+          "sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+          "bytes": 2049096,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              100.0,
+              400.0,
+              900.0
+            ],
+            "wdth": [
+              62.5,
+              100.0,
+              100.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/notosans/NotoSans%5Bwdth%2Cwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "notoserif",
+      "family": "Noto Serif",
+      "category": "serif",
+      "use": "Documentary, quotations, editorial chapters",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "notoserif/OFL.txt",
+      "license_sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "faces": [
+        {
+          "file": "notoserif/NotoSerif[wdth,wght].ttf",
+          "sha256": "4d8e6761424656867019081a1a01336f3cb086982682698714054fc33f782713",
+          "bytes": 1887192,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              100.0,
+              400.0,
+              900.0
+            ],
+            "wdth": [
+              62.5,
+              100.0,
+              100.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/notoserif/NotoSerif%5Bwdth%2Cwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        },
+        {
+          "file": "notoserif/NotoSerif-Italic[wdth,wght].ttf",
+          "sha256": "e87acbc6c0efd0d9a20d6a8cbbda2b266c14be3a3a6f5af8ec9d7b2460570ad1",
+          "bytes": 2448496,
+          "weight": "100 900",
+          "style": "italic",
+          "axes": {
+            "wght": [
+              100.0,
+              400.0,
+              900.0
+            ],
+            "wdth": [
+              62.5,
+              100.0,
+              100.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/notoserif/NotoSerif-Italic%5Bwdth%2Cwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "manrope",
+      "family": "Manrope",
+      "category": "sans",
+      "use": "Clean technology, diagrams",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "manrope/OFL.txt",
+      "license_sha256": "58172e0c0fac2cda8a37b348164bb55e44b0e69051e557e92b1d3f6910141f7b",
+      "faces": [
+        {
+          "file": "manrope/Manrope[wght].ttf",
+          "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+          "bytes": 164700,
+          "weight": "200 800",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              200.0,
+              200.0,
+              800.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/manrope/Manrope%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "archivo",
+      "family": "Archivo",
+      "category": "sans",
+      "use": "Bold explanation, sports titles",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "archivo/OFL.txt",
+      "license_sha256": "108b4e57c9c796d3d38d0428ca7ee39de47ad93187302718d9b2d8864b9b716b",
+      "faces": [
+        {
+          "file": "archivo/Archivo[wdth,wght].ttf",
+          "sha256": "0e094a7d3c7c4c25cf1310c4b30014f1dae9332220b1c2c88f4fa996f0b05053",
+          "bytes": 658596,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              100.0,
+              600.0,
+              900.0
+            ],
+            "wdth": [
+              62.0,
+              100.0,
+              125.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/archivo/Archivo%5Bwdth%2Cwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "oswald",
+      "family": "Oswald",
+      "category": "condensed",
+      "use": "Short display titles, narrow labels; not long body text",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "oswald/OFL.txt",
+      "license_sha256": "0fd731a904b729a4e02eaf5e8ebd06783edd9abe400e8882760160230675b652",
+      "faces": [
+        {
+          "file": "oswald/Oswald[wght].ttf",
+          "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817",
+          "bytes": 172088,
+          "weight": "200 700",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              200.0,
+              400.0,
+              700.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/oswald/Oswald%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "bitter",
+      "family": "Bitter",
+      "category": "serif",
+      "use": "Robust editorial statements",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "bitter/OFL.txt",
+      "license_sha256": "152a1e283e23b42c4940da4c72f2f5bebaa17969cb77c76d7af05903846006f1",
+      "faces": [
+        {
+          "file": "bitter/Bitter[wght].ttf",
+          "sha256": "ef2b9a711fb02f1e5823b34da1b7450e0fc76793b7d733a8b41006e24916d4a7",
+          "bytes": 328636,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              100.0,
+              100.0,
+              900.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/bitter/Bitter%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "lora",
+      "family": "Lora",
+      "category": "serif",
+      "use": "Literature, culture, quotations",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "lora/OFL.txt",
+      "license_sha256": "1d9a970809ac804b582a6ce7f0ebc4e7fefcbfd7ff6299cad35ee656a21be716",
+      "faces": [
+        {
+          "file": "lora/Lora[wght].ttf",
+          "sha256": "822a6621ccbe8d97d20ac88c1c41f5615c9c2c202eaa75f272cd452aac6475a7",
+          "bytes": 212196,
+          "weight": "400 700",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              400.0,
+              400.0,
+              700.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/lora/Lora%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        },
+        {
+          "file": "lora/Lora-Italic[wght].ttf",
+          "sha256": "22d8d8854b53807aa664ca34f2031a9ed57a1d0dea296b8b96cdd3aad937a2b3",
+          "bytes": 221232,
+          "weight": "400 700",
+          "style": "italic",
+          "axes": {
+            "wght": [
+              400.0,
+              400.0,
+              700.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/lora/Lora-Italic%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "ibmplexmono",
+      "family": "IBM Plex Mono",
+      "category": "mono",
+      "use": "Code, units, technical labels; not paragraph captions",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "ibmplexmono/OFL.txt",
+      "license_sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "faces": [
+        {
+          "file": "ibmplexmono/IBMPlexMono-Bold.ttf",
+          "sha256": "ac27abd6450a64dd94467580a02fe6235156d5b92f2926ebbc8e7489df64e0be",
+          "bytes": 137784,
+          "weight": "700",
+          "style": "normal",
+          "axes": {},
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/ibmplexmono/IBMPlexMono-Bold.ttf",
+          "vietnamese_nfc_missing": []
+        },
+        {
+          "file": "ibmplexmono/IBMPlexMono-Regular.ttf",
+          "sha256": "6a3412f058c7d8dfd9170c41e85ade48e5156ecb89356110ca57a0a27734af46",
+          "bytes": 135580,
+          "weight": "400",
+          "style": "normal",
+          "axes": {},
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/ibmplexmono/IBMPlexMono-Regular.ttf",
+          "vietnamese_nfc_missing": []
+        },
+        {
+          "file": "ibmplexmono/IBMPlexMono-SemiBold.ttf",
+          "sha256": "d3c38e55c78f5b0f28009fddba4834ec503278936a5986032424c9bd2d23aa46",
+          "bytes": 140216,
+          "weight": "600",
+          "style": "normal",
+          "axes": {},
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/ibmplexmono/IBMPlexMono-SemiBold.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "comfortaa",
+      "family": "Comfortaa",
+      "category": "rounded",
+      "use": "Friendly introductory explainers",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "comfortaa/OFL.txt",
+      "license_sha256": "bc85bae0b512b799bbfb2b916e4d0a34cfd963d09778cd783e248b479e67760a",
+      "faces": [
+        {
+          "file": "comfortaa/Comfortaa[wght].ttf",
+          "sha256": "0fc3f45dc48b614db9c39181502544b37217ecbf8bee2fb35886992bc96c5bd3",
+          "bytes": 201756,
+          "weight": "300 700",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              300.0,
+              400.0,
+              700.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/comfortaa/Comfortaa%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "robotoslab",
+      "family": "Roboto Slab",
+      "category": "slab",
+      "use": "Science and structured knowledge",
+      "license": "Apache License 2.0",
+      "license_file": "robotoslab/LICENSE.txt",
+      "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "faces": [
+        {
+          "file": "robotoslab/RobotoSlab[wght].ttf",
+          "sha256": "786ae192477447d33c6672c3055fba7cbfe45184c9a79e77a14f15716ca05b16",
+          "bytes": 251880,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              100.0,
+              400.0,
+              900.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/apache/robotoslab/RobotoSlab%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "inter",
+      "family": "Inter",
+      "category": "sans",
+      "use": "Neutral modern education",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "inter/OFL.txt",
+      "license_sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "faces": [
+        {
+          "file": "inter/Inter[opsz,wght].ttf",
+          "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+          "bytes": 876576,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "opsz": [
+              14.0,
+              14.0,
+              32.0
+            ],
+            "wght": [
+              100.0,
+              400.0,
+              900.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "sourcesans3",
+      "family": "Source Sans 3",
+      "category": "sans",
+      "use": "Readable body and analytical charts",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "sourcesans3/OFL.txt",
+      "license_sha256": "09746787287a289323b0ec3cff4d1a4a801331b82b7207c1e186f5d26619a392",
+      "faces": [
+        {
+          "file": "sourcesans3/SourceSans3[wght].ttf",
+          "sha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9",
+          "bytes": 646340,
+          "weight": "200 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              200.0,
+              200.0,
+              900.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "vollkorn",
+      "family": "Vollkorn",
+      "category": "serif",
+      "use": "History and narrative chapters",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "vollkorn/OFL.txt",
+      "license_sha256": "53f9c99fa3d47f7d632a42ee7bab4a834a60a744f6026d676c3a223cef2b2ef3",
+      "faces": [
+        {
+          "file": "vollkorn/Vollkorn[wght].ttf",
+          "sha256": "4ebef434f76f80286204840354a84db79a0dc3c87deeeb791e015b70b2ade49d",
+          "bytes": 577864,
+          "weight": "400 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              400.0,
+              400.0,
+              900.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/vollkorn/Vollkorn%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "lexend",
+      "family": "Lexend",
+      "category": "sans",
+      "use": "Open letterforms for explanations",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "lexend/OFL.txt",
+      "license_sha256": "5da8505887d0fa7fe963445fd58852707fda34adfeb65af25c99d152bab285bd",
+      "faces": [
+        {
+          "file": "lexend/Lexend[wght].ttf",
+          "sha256": "3add53e641fbc81da64da4bb254285e2831b52b029527bc0714e2b9610832ee6",
+          "bytes": 175756,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              100.0,
+              400.0,
+              900.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/lexend/Lexend%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    },
+    {
+      "id": "montserrat",
+      "family": "Montserrat",
+      "category": "sans",
+      "use": "Display headings and clean geometry",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "montserrat/OFL.txt",
+      "license_sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+      "faces": [
+        {
+          "file": "montserrat/Montserrat[wght].ttf",
+          "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+          "bytes": 744936,
+          "weight": "100 900",
+          "style": "normal",
+          "axes": {
+            "wght": [
+              100.0,
+              100.0,
+              900.0
+            ]
+          },
+          "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+          "vietnamese_nfc_missing": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1135 @@
+{
+ "version": 2,
+ "panels": [
+  "source",
+  "t+10",
+  "t+30",
+  "t+52"
+ ],
+ "effects": {
+  "fade_in": {
+   "frames": [
+    10,
+    30,
+    52
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/fade_in.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/fade_in.jpg"
+   }
+  },
+  "fade_out": {
+   "frames": [
+    70,
+    90,
+    112
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/fade_out.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/fade_out.jpg"
+   }
+  },
+  "rise": {
+   "frames": [
+    130,
+    150,
+    172
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/rise.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/rise.jpg"
+   }
+  },
+  "drop": {
+   "frames": [
+    190,
+    210,
+    232
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/drop.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/drop.jpg"
+   }
+  },
+  "slide_left": {
+   "frames": [
+    250,
+    270,
+    292
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/slide_left.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/slide_left.jpg"
+   }
+  },
+  "slide_right": {
+   "frames": [
+    310,
+    330,
+    352
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/slide_right.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/slide_right.jpg"
+   }
+  },
+  "pop": {
+   "frames": [
+    370,
+    390,
+    412
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/pop.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/pop.jpg"
+   }
+  },
+  "spring": {
+   "frames": [
+    430,
+    450,
+    472
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/spring.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/spring.jpg"
+   }
+  },
+  "blur_in": {
+   "frames": [
+    490,
+    510,
+    532
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/blur_in.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/blur_in.jpg"
+   }
+  },
+  "rotate_in": {
+   "frames": [
+    550,
+    570,
+    592
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/rotate_in.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/rotate_in.jpg"
+   }
+  },
+  "flip_x": {
+   "frames": [
+    610,
+    630,
+    652
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/flip_x.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/flip_x.jpg"
+   }
+  },
+  "flip_y": {
+   "frames": [
+    670,
+    690,
+    712
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/flip_y.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/flip_y.jpg"
+   }
+  },
+  "zoom_in": {
+   "frames": [
+    730,
+    750,
+    772
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/zoom_in.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/zoom_in.jpg"
+   }
+  },
+  "zoom_out": {
+   "frames": [
+    790,
+    810,
+    832
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/zoom_out.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/zoom_out.jpg"
+   }
+  },
+  "pan_x": {
+   "frames": [
+    850,
+    870,
+    892
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/pan_x.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/pan_x.jpg"
+   }
+  },
+  "pan_y": {
+   "frames": [
+    910,
+    930,
+    952
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/pan_y.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/pan_y.jpg"
+   }
+  },
+  "float": {
+   "frames": [
+    970,
+    990,
+    1012
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/float.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/float.jpg"
+   }
+  },
+  "pulse": {
+   "frames": [
+    1030,
+    1050,
+    1072
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/pulse.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/pulse.jpg"
+   }
+  },
+  "shake": {
+   "frames": [
+    1090,
+    1110,
+    1132
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/shake.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/shake.jpg"
+   }
+  },
+  "orbit": {
+   "frames": [
+    1150,
+    1170,
+    1192
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/orbit.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/orbit.jpg"
+   }
+  },
+  "spin": {
+   "frames": [
+    1210,
+    1230,
+    1252
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/spin.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/spin.jpg"
+   }
+  },
+  "skew": {
+   "frames": [
+    1270,
+    1290,
+    1312
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/skew.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/skew.jpg"
+   }
+  },
+  "wipe_left": {
+   "frames": [
+    1330,
+    1350,
+    1372
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/wipe_left.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/wipe_left.jpg"
+   }
+  },
+  "wipe_right": {
+   "frames": [
+    1390,
+    1410,
+    1432
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/wipe_right.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/wipe_right.jpg"
+   }
+  },
+  "wipe_up": {
+   "frames": [
+    1450,
+    1470,
+    1492
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/wipe_up.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/wipe_up.jpg"
+   }
+  },
+  "wipe_down": {
+   "frames": [
+    1510,
+    1530,
+    1552
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/wipe_down.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/wipe_down.jpg"
+   }
+  },
+  "iris": {
+   "frames": [
+    1570,
+    1590,
+    1612
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/iris.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/iris.jpg"
+   }
+  },
+  "typewriter": {
+   "frames": [
+    1630,
+    1650,
+    1672
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/typewriter.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/typewriter.jpg"
+   }
+  },
+  "tracking_in": {
+   "frames": [
+    1690,
+    1710,
+    1732
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/tracking_in.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/tracking_in.jpg"
+   }
+  },
+  "highlight": {
+   "frames": [
+    1750,
+    1770,
+    1792
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/highlight.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/highlight.jpg"
+   }
+  },
+  "glow": {
+   "frames": [
+    1810,
+    1830,
+    1852
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/glow.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/glow.jpg"
+   }
+  },
+  "shadow": {
+   "frames": [
+    1870,
+    1890,
+    1912
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/shadow.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/shadow.jpg"
+   }
+  },
+  "brightness": {
+   "frames": [
+    1930,
+    1950,
+    1972
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/brightness.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/brightness.jpg"
+   }
+  },
+  "contrast": {
+   "frames": [
+    1990,
+    2010,
+    2032
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/contrast.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/contrast.jpg"
+   }
+  },
+  "saturate": {
+   "frames": [
+    2050,
+    2070,
+    2092
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/saturate.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/saturate.jpg"
+   }
+  },
+  "grayscale": {
+   "frames": [
+    2110,
+    2130,
+    2152
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/grayscale.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/grayscale.jpg"
+   }
+  },
+  "sepia": {
+   "frames": [
+    2170,
+    2190,
+    2212
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/sepia.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/sepia.jpg"
+   }
+  },
+  "hue": {
+   "frames": [
+    2230,
+    2250,
+    2272
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/hue.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/hue.jpg"
+   }
+  },
+  "warm": {
+   "frames": [
+    2290,
+    2310,
+    2332
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/warm.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/warm.jpg"
+   }
+  },
+  "cool": {
+   "frames": [
+    2350,
+    2370,
+    2392
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/cool.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/cool.jpg"
+   }
+  },
+  "invert": {
+   "frames": [
+    2410,
+    2430,
+    2452
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/invert.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/invert.jpg"
+   }
+  },
+  "blur": {
+   "frames": [
+    2470,
+    2490,
+    2512
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/blur.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/blur.jpg"
+   }
+  },
+  "rounded": {
+   "frames": [
+    2530,
+    2550,
+    2572
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/rounded.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/rounded.jpg"
+   }
+  },
+  "circle": {
+   "frames": [
+    2590,
+    2610,
+    2632
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/circle.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/circle.jpg"
+   }
+  },
+  "vignette": {
+   "frames": [
+    2650,
+    2670,
+    2692
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/vignette.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/vignette.jpg"
+   }
+  },
+  "scanlines": {
+   "frames": [
+    2710,
+    2730,
+    2752
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/scanlines.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/scanlines.jpg"
+   }
+  },
+  "letterbox": {
+   "frames": [
+    2770,
+    2790,
+    2812
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/letterbox.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/letterbox.jpg"
+   }
+  },
+  "border": {
+   "frames": [
+    2830,
+    2850,
+    2872
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/border.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/border.jpg"
+   }
+  },
+  "progress": {
+   "frames": [
+    2890,
+    2910,
+    2932
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/progress.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/progress.jpg"
+   }
+  },
+  "flash": {
+   "frames": [
+    2950,
+    2970,
+    2992
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/flash.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/flash.jpg"
+   }
+  },
+  "diagonal_reveal": {
+   "frames": [
+    3010,
+    3030,
+    3052
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/diagonal_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/diagonal_reveal.jpg"
+   }
+  },
+  "diamond_reveal": {
+   "frames": [
+    3070,
+    3090,
+    3112
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/diamond_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/diamond_reveal.jpg"
+   }
+  },
+  "soft_edge_reveal": {
+   "frames": [
+    3130,
+    3150,
+    3172
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/soft_edge_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/soft_edge_reveal.jpg"
+   }
+  },
+  "slide_spring": {
+   "frames": [
+    3190,
+    3210,
+    3232
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/slide_spring.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/slide_spring.jpg"
+   }
+  },
+  "focus_zoom": {
+   "frames": [
+    3250,
+    3270,
+    3292
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/focus_zoom.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/focus_zoom.jpg"
+   }
+  },
+  "defocus_pulse": {
+   "frames": [
+    3310,
+    3330,
+    3352
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/defocus_pulse.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/defocus_pulse.jpg"
+   }
+  },
+  "fade_pulse": {
+   "frames": [
+    3370,
+    3390,
+    3412
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/fade_pulse.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/fade_pulse.jpg"
+   }
+  },
+  "light_sweep": {
+   "frames": [
+    3430,
+    3450,
+    3472
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/light_sweep.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/light_sweep.jpg"
+   }
+  },
+  "paper_grain": {
+   "frames": [
+    3490,
+    3510,
+    3532
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/paper_grain.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/paper_grain.jpg"
+   }
+  },
+  "text_outline": {
+   "frames": [
+    3550,
+    3570,
+    3592
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/text_outline.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/text_outline.jpg"
+   }
+  },
+  "marker_reveal": {
+   "frames": [
+    3610,
+    3630,
+    3652
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/marker_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/marker_reveal.jpg"
+   }
+  },
+  "exposure": {
+   "frames": [
+    3670,
+    3690,
+    3712
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/exposure.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/exposure.jpg"
+   }
+  },
+  "word_reveal": {
+   "frames": [
+    3730,
+    3750,
+    3772
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/word_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/word_reveal.jpg"
+   }
+  },
+  "line_reveal": {
+   "frames": [
+    3790,
+    3810,
+    3832
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/line_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/line_reveal.jpg"
+   }
+  },
+  "character_reveal": {
+   "frames": [
+    3850,
+    3870,
+    3892
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/character_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/character_reveal.jpg"
+   }
+  },
+  "text_gradient": {
+   "frames": [
+    3910,
+    3930,
+    3952
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/text_gradient.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/text_gradient.jpg"
+   }
+  },
+  "underline_draw": {
+   "frames": [
+    3970,
+    3990,
+    4012
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/underline_draw.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/underline_draw.jpg"
+   }
+  },
+  "radial_glow": {
+   "frames": [
+    4030,
+    4050,
+    4072
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/radial_glow.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/radial_glow.jpg"
+   }
+  },
+  "edge_feather": {
+   "frames": [
+    4090,
+    4110,
+    4132
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/edge_feather.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/edge_feather.jpg"
+   }
+  },
+  "mask_reveal": {
+   "frames": [
+    4150,
+    4170,
+    4192
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/mask_reveal.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/mask_reveal.jpg"
+   }
+  },
+  "char_spring": {
+   "frames": [
+    4210,
+    4230,
+    4252
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/char_spring.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/char_spring.jpg"
+   }
+  },
+  "handheld": {
+   "frames": [
+    4270,
+    4290,
+    4312
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/handheld.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/handheld.jpg"
+   }
+  },
+  "rgb_split": {
+   "frames": [
+    4330,
+    4350,
+    4372
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/rgb_split.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/rgb_split.jpg"
+   }
+  },
+  "glitch": {
+   "frames": [
+    4390,
+    4410,
+    4432
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/glitch.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/glitch.jpg"
+   }
+  },
+  "decode": {
+   "frames": [
+    4450,
+    4470,
+    4492
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/decode.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/decode.jpg"
+   }
+  },
+  "motion_blur": {
+   "frames": [
+    4510,
+    4530,
+    4552
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/motion_blur.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/motion_blur.jpg"
+   }
+  },
+  "color_to": {
+   "frames": [
+    4570,
+    4590,
+    4612
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/color_to.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/color_to.jpg"
+   }
+  },
+  "text_animate": {
+   "frames": [
+    4630,
+    4650,
+    4672
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/text_animate.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/text_animate.jpg"
+   }
+  },
+  "gate_weave": {
+   "frames": [
+    4690,
+    4710,
+    4732
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/gate_weave.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/gate_weave.jpg"
+   }
+  },
+  "boil": {
+   "frames": [
+    4750,
+    4770,
+    4792
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/boil.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/boil.jpg"
+   }
+  },
+  "jitter": {
+   "frames": [
+    4810,
+    4830,
+    4852
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/jitter.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/jitter.jpg"
+   }
+  },
+  "clock_wipe": {
+   "frames": [
+    4870,
+    4890,
+    4912
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/clock_wipe.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/clock_wipe.jpg"
+   }
+  },
+  "bloom": {
+   "frames": [
+    4930,
+    4950,
+    4972
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/bloom.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/bloom.jpg"
+   }
+  },
+  "tracking": {
+   "frames": [
+    4990,
+    5010,
+    5032
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/tracking.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/tracking.jpg"
+   }
+  },
+  "luma_alpha": {
+   "frames": [
+    5050,
+    5070,
+    5092
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/luma_alpha.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/luma_alpha.jpg"
+   }
+  },
+  "tint_fill": {
+   "frames": [
+    5110,
+    5130,
+    5152
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/tint_fill.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/tint_fill.jpg"
+   }
+  },
+  "highlight_glow": {
+   "frames": [
+    5170,
+    5190,
+    5212
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/highlight_glow.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/highlight_glow.jpg"
+   }
+  },
+  "tritone": {
+   "frames": [
+    5230,
+    5250,
+    5272
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/tritone.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/tritone.jpg"
+   }
+  },
+  "heat_distortion": {
+   "frames": [
+    5290,
+    5310,
+    5332
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/heat_distortion.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/heat_distortion.jpg"
+   }
+  },
+  "halation": {
+   "frames": [
+    5350,
+    5370,
+    5392
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/halation.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/halation.jpg"
+   }
+  },
+  "light_wrap": {
+   "frames": [
+    5410,
+    5430,
+    5452
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/light_wrap.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/light_wrap.jpg"
+   }
+  },
+  "impact_shake": {
+   "frames": [
+    130,
+    150,
+    172
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/impact_shake.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/impact_shake.jpg"
+   }
+  },
+  "impact_zoom": {
+   "frames": [
+    190,
+    210,
+    232
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/impact_zoom.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/impact_zoom.jpg"
+   }
+  },
+  "white_flash": {
+   "frames": [
+    10,
+    30,
+    52
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/white_flash.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/white_flash.jpg"
+   }
+  },
+  "chroma_split": {
+   "frames": [
+    70,
+    90,
+    112
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/chroma_split.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/chroma_split.jpg"
+   }
+  }
+ },
+ "combos": {
+  "archival_film": {
+   "frames": [
+    5475,
+    5505,
+    5540
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/archival_film.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/archival_film.jpg"
+   }
+  },
+  "impact_title": {
+   "frames": [
+    5565,
+    5595,
+    5630
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/impact_title.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/impact_title.jpg"
+   }
+  },
+  "neon_tech": {
+   "frames": [
+    5655,
+    5685,
+    5720
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/neon_tech.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/neon_tech.jpg"
+   }
+  },
+  "handmade_collage": {
+   "frames": [
+    5745,
+    5775,
+    5810
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/handmade_collage.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/handmade_collage.jpg"
+   }
+  },
+  "fire_composite": {
+   "frames": [
+    5835,
+    5865,
+    5900
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/fire_composite.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/fire_composite.jpg"
+   }
+  },
+  "cutout_integration": {
+   "frames": [
+    5925,
+    5955,
+    5990
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/cutout_integration.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/cutout_integration.jpg"
+   }
+  },
+  "documentary_push": {
+   "frames": [
+    6015,
+    6045,
+    6080
+   ],
+   "strip": {
+    "remotion": "assets/previews/effects/remotion/documentary_push.jpg",
+    "hyperframes": "assets/previews/effects/hyperframes/documentary_push.jpg"
+   }
+  }
+ }
+}

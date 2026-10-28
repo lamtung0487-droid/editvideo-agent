@@ -1,0 +1,2 @@
+# Optional offline narration (setup.ps1 -Voice). Piper is GPL-3.0-or-later and runs only as a separate process.
+piper-tts==1.8.0

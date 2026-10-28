@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=77"]  # a licence expression (PEP 639)
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "editvideo-agent"
+version = "0.8.0"
+description = "Senses, hands and composition skills for AI video editing: an MCP server and CLI over Remotion and HyperFrames"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.30,<1",
+  "python-multipart>=0.0.18,<1",
+  "pillow>=10.4,<13",
+  "fonttools>=4.66,<5",
+  "httpx>=0.27,<1",
+  "edge-tts>=7.2,<8",
+  "mcp>=1.26,<2",
+  "numpy>=2,<3",
+  "faster-whisper>=1.2,<2",
+  "opencv-python-headless>=4.12,<5",
+  "filelock>=3,<5",
+  "scipy>=1.11,<2",
+  "pywin32>=312; sys_platform == 'win32'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+geo = ["tifffile>=2025", "imagecodecs>=2025", "pymupdf>=1.24", "pyproj>=3.6"]
+# GPU extras (CUDA torch index, SAM2 pin, LTX/ProPainter) install through requirements.vision.txt and
+# requirements.temporal.txt with setup.ps1 -Vision / -Temporal; pip extras cannot carry the CUDA index.
+
+[project.scripts]
+editvideo-mcp = "editvideo.mcp_server:main"
+
+[tool.setuptools]
+packages = ["editvideo", "learnkit", "learnkit.senses"]

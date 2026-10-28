@@ -1,0 +1,40 @@
+[
+ {"skills": ["editvideo-agent"],
+  "query": "Dựng video du lịch 30s dọc từ các clip Sài Gòn, Hội An, Hạ Long, phong cách năng động, không cần tiếng.",
+  "files": ["data/sources/commons/saigon_traffic.webm", "data/sources/commons/hoian_market.webm", "data/sources/commons/halong_cruise.webm"],
+  "expected_behavior": [
+   "Writes and saves a storyboard (message, arc, direction_id travel_energy or similar, one breather, negative list) before composing",
+   "Applies a creative direction and keeps transitions to one primary plus accents from its vocabulary",
+   "Uses a hero technique that orients the journey (map_journey or globe_dive) via compose_cinematic with dry_run first",
+   "Runs audit_timeline before rendering and motion_audit + cut_audit after, and fixes the 25/30 fps duplicate-frame finding (retime/conform) or states it",
+   "Compiles credits with project_credits instead of typing them"]},
+ {"skills": ["editvideo-agent"],
+  "query": "Video của tôi xem như slideshow, sửa giúp cho chuyên nghiệp hơn.",
+  "files": [],
+  "expected_behavior": [
+   "Measures before changing: motion_audit (calm shots, static spans, uniform energy) and audit_timeline (simultaneous_entrances, transition_variety, dip_transition, missing_entrance)",
+   "Applies apply_direction restyle to unify curves, stagger entrances and add ambient idle instead of adding random effects",
+   "Adds something that crosses shot boundaries (attached layers, match cut, continuous camera) and varies energy with one breather",
+   "Re-renders and re-measures the same frames, reporting before/after numbers"]},
+ {"skills": ["editvideo-agent"],
+  "query": "Tìm thêm footage đèn lồng Hội An có license để dùng.",
+  "files": [],
+  "expected_behavior": [
+   "Uses find_sources (search only) and presents file name, source page, licence and size",
+   "Waits for explicit user approval before fetch_source and passes expected_bytes",
+   "Registers the file with licence/credit and later traces it through project_credits"]},
+ {"skills": ["editvideo-agent"],
+  "query": "Làm cảnh mở đầu chữ tên địa danh nằm sau người trong clip.",
+  "files": ["data/sources/commons/hoian_market.webm"],
+  "expected_behavior": [
+   "Runs track_subject then edit_subject foreground for the same window and attaches the alpha video",
+   "Uses compose_cinematic text_behind_subject (shot motion hold, focus 0.5/0.5, fit cover) and reports the covered range",
+   "Verifies with review_frames: covered_fraction near target, contrast_p10, same_as_background_fraction, and adjusts placement or adds shadow"]},
+ {"skills": ["editvideo-agent"],
+  "query": "Cắt video theo nhịp bài nhạc này và làm phong cách VHS thập niên 90.",
+  "files": [],
+  "expected_behavior": [
+   "Calls beat_track and checks the BPM for half/double-time before snap_cuts_to_beats (dry_run first)",
+   "Applies the retro_vhs direction with finish (vhs/scanlines look, grain) and stepped or ease_out motion",
+   "Verifies with cut_audit (rhythm) and motion_audit after rendering"]}
+]

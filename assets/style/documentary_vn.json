@@ -1,0 +1,84 @@
+{
+  "id": "documentary_vn",
+  "about": "Series bible for the Vietnam documentaries (round 13). Every generator reads it: one palette, one serif and one sans, one label scale, one camera language, one light, one finish, for every episode (the lesson of Antenna's Turning Point and Elastic's WWII: From the Frontlines; reports/Nâng cấp 3D phim tài liệu.md). Change a value here, not in a scene.",
+  "palette": {
+    "ink": "#f4ead8",
+    "ink_muted": "#d8cfbf",
+    "background": "#0b0c0e",
+    "land": "#3b3833",
+    "sea": "#16222e",
+    "table": "#0c0a09",
+    "border": "#6a655c",
+    "sides": {
+      "vietnam": "#c99a3e",
+      "vietnam_glow": "#e0b24c",
+      "socialist_bloc": "#8f2a21",
+      "western_bloc": "#2f5c9c",
+      "neutral": "#5d5850"
+    },
+    "flow": {
+      "socialist_bloc": "#d0614c",
+      "western_bloc": "#7da6e0"
+    },
+    "route": "#e8b04a",
+    "route_new": "#9ee07a",
+    "strike": "#ff4b2b",
+    "zone": "#ff3b1f",
+    "pin": "#ffd48a"
+  },
+  "typography_style": "cinema_documentary",
+  "label": {
+    "min_px": 26,
+    "cps_vi": 17,
+    "cps_en": 20,
+    "min_hold_s": 1.5,
+    "busy_ground_extra_s": 0.5,
+    "over_narration_extra_s": 1.0,
+    "safe_area": 0.03,
+    "contrast_min": 4.5,
+    "contrast_min_large": 3.0
+  },
+  "camera": {
+    "lens_mm": [35, 85],
+    "max_frame_widths_per_s": 0.143,
+    "ease": "ease_in_out",
+    "roll_deg": 0,
+    "shutter": 0.2
+  },
+  "light": {
+    "sun_azimuth": 330,
+    "sun_elevation": 22,
+    "sun_strength": 6.0,
+    "sun_color": "#ffe2c0",
+    "shadow_tint": "#5a6a80",
+    "sky": {"horizon": "#d9d4c8", "zenith": "#4f6f93", "strength": 0.8}
+  },
+  "atmosphere": {
+    "haze": {"density": 0.004, "color": "#cdd6de"},
+    "mist_color": "#e7ece8"
+  },
+  "map": {
+    "view_transform": "Khronos PBR Neutral",
+    "flow_style": "draw",
+    "flow_glow": 1.2,
+    "bead_glow": 2.5
+  },
+  "render": {
+    "terrain_view_transform": "AgX",
+    "terrain_look": "AgX - Medium High Contrast",
+    "color_depth": "16",
+    "samples": 48
+  },
+  "finish": {
+    "grain": 0.035,
+    "grain_size": 1.6,
+    "soften": 0.6,
+    "halation": 0.18,
+    "gate_weave_px": 0.6,
+    "vignette": 0.25
+  },
+  "motion": {
+    "stagger_frames": [6, 12],
+    "overshoot": 0
+  }
+}

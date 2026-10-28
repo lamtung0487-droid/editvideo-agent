@@ -1,0 +1,11 @@
+# Install after requirements.vision.txt (CUDA torch is configured there).
+diffusers==0.35.2
+transformers==4.57.1
+accelerate==1.11.0
+safetensors==0.6.2
+sentencepiece==0.2.1
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+einops==0.8.1
+scipy==1.17.0
+matplotlib==3.10.8

@@ -1,0 +1,23 @@
+## Source contracts
+
+**Remotion:** entry `index.tsx`, composition ID `AgentVideo`, props in `input.json`, assets in `public/`. Use `useCurrentFrame`, `Sequence` and frame-based interpolation for seekable animation. Imported React/Remotion resolve from the pinned engines runtime. `render` supplies the current locked timeline/config. Narration and ducked music are mixed after visual rendering; embedded source audio is muted in this narration workflow.
+
+**Hyperframes:** entry `index.html`, composition ID `AgentVideo`, local GSAP, `effects.js` and `hyper-runtime.js`. Generated `input.js` supplies current data. Root declares dimensions, 30fps and duration. Paused timeline registered at `window.__timelines.AgentVideo`. Timed video uses ID, `data-start`, `data-duration`, `data-media-start` and `muted playsinline`. Do not nest timed media inside another timed plain wrapper. Hyperframes owns ordinary video seeking; runtime maps nonunit playback rates by source time. Never call `play()` or use wall-clock timers. Use local assets/fonts for repeatable output.
+
+Fifteen layer kinds cover text/image/video/shape/counter/bar_chart/line_chart/flow/particles/caption/callout/pattern/icon/scene3d/svg; any layer may set attach_shot to move with its shot's transitions. Use structured chart data and labels; never present arbitrary animation values as facts. Sixty-nine catalog effects work in both engines; typed keyframes cover x/y/scale/rotate/opacity/blur. TTS and separately placed audio clips are mixed after visuals; choose source audio explicitly. Fifteen portable transitions (dissolve/wipes/iris/blur_in/zoom_in plus two-sided push_left/right/up/down, whip_left/right, zoom_through) preserve voice duration. `mode:freeze` (default) moves the outgoing last frame; `mode:live` keeps the outgoing shot playing from its source handle (validated: previous source_start+(length+duration)*rate must fit the asset). Smooth slow motion, speed ramps and shutter motion blur for footage come from `retime_footage` (bidirectional optical flow), then place the clip at playback_rate 1. Read [editing recipes](../../../../docs/AGENT_RECIPES.md) when composing layers, audio or tracking.
+
+Use custom SVG/React/HTML for techniques beyond the catalog, including bespoke diagrams. Remotion uses portable `effects.cjs`; Hyperframes `effects.js`. These and the runtime are editable. Shared timeline translates through both engines, but custom React/HTML source does not translate automatically.
+
+At 30fps, shot ranges are `[start_frame,end_frame)`. Effect/keyframe frames are local; keyframes strictly increase and remain inside duration. Visual track covers locked audio exactly. Source offsets are seconds; voice 48kHz, 1600 samples/frame. Change script/voice/profile by planning again; data patches preserve v2 custom source. Render jobs keep source snapshots/hashes. Revision/hash conflict means reread and reapply intent.
+
+Hyperframes root metadata is authored HTML: replan changing dimensions/duration needs an export refresh preserving useful custom code. Ordinary patches keep locked dimensions/duration and do not need reexport. Remotion metadata comes from current props.
+
+## Render resources
+
+- Remotion renders WebGL on the GPU by default (`gl=angle`, 3.5–4× faster than software on the Mars film, PSNR ≥39.8 dB vs it). Force a backend with `EDITVIDEO_GL`.
+- Videos render in chunks of `EDITVIDEO_CHUNK_FRAMES` (default 300), each in a fresh browser, then join without re-encoding. Long films that mount several WebGL scenes with 8K textures crashed a GPU tab at ~30% when rendered in one pass. A failed chunk retries with half the tabs, then falls back to `swangle`; only that chunk is re-rendered. `technical.json` → `render` records chunks, tabs, free commit and any fallback.
+- `EDITVIDEO_RENDER_CONCURRENCY` (default 6) sets Remotion tabs and HyperFrames workers. Remotion also caps tabs by free commit memory (≈3.5 GB fixed + 1.3 GB per tab with 3D). On Windows, GPU allocations count against commit, and running out crashes Chrome (`0xe0000008`) instead of swapping. 3 tabs ran at 92% of the speed of 6.
+- 3D image textures are fitted to `texture_max` (default 2× the frame's long edge, settable per scene3d layer). An 8K equirect map gave the same frames (≥43 dB) at a quarter of the GPU memory. Scene textures are disposed when the scene unmounts.
+- `EDITVIDEO_FRAME_RANGE=a-b` renders an inclusive frame section for previews and benchmarks.
+- Disk: renders need ~1.5 GB free and snapshots ~1 GB (`ensure_free` raises before starting). A render stores `final.mp4` plus small files; intermediate `visual.mp4` and per-shot encodes are removed after the mux.
+

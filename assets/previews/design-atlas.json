@@ -1,0 +1,926 @@
+{
+ "entries": [
+  {
+   "kind": "style",
+   "id": "vietnam_knowledge",
+   "page": 0,
+   "timestamp": 1.2
+  },
+  {
+   "kind": "style",
+   "id": "documentary",
+   "page": 1,
+   "timestamp": 3.2
+  },
+  {
+   "kind": "style",
+   "id": "editorial_paper",
+   "page": 2,
+   "timestamp": 5.2
+  },
+  {
+   "kind": "style",
+   "id": "science_lab",
+   "page": 3,
+   "timestamp": 7.2
+  },
+  {
+   "kind": "style",
+   "id": "minimal_explainer",
+   "page": 4,
+   "timestamp": 9.2
+  },
+  {
+   "kind": "style",
+   "id": "short_bold",
+   "page": 5,
+   "timestamp": 11.2
+  },
+  {
+   "kind": "style",
+   "id": "culture_story",
+   "page": 6,
+   "timestamp": 13.2
+  },
+  {
+   "kind": "style",
+   "id": "friendly_learning",
+   "page": 7,
+   "timestamp": 15.2
+  },
+  {
+   "kind": "style",
+   "id": "technical_blueprint",
+   "page": 8,
+   "timestamp": 17.2
+  },
+  {
+   "kind": "style",
+   "id": "data_report",
+   "page": 9,
+   "timestamp": 19.2
+  },
+  {
+   "kind": "style",
+   "id": "ocean_calm",
+   "page": 10,
+   "timestamp": 21.2
+  },
+  {
+   "kind": "style",
+   "id": "creative_essay",
+   "page": 11,
+   "timestamp": 23.2
+  },
+  {
+   "kind": "style",
+   "id": "history_archive",
+   "page": 12,
+   "timestamp": 25.2
+  },
+  {
+   "kind": "style",
+   "id": "bright_education",
+   "page": 13,
+   "timestamp": 27.2
+  },
+  {
+   "kind": "style",
+   "id": "nature_field",
+   "page": 14,
+   "timestamp": 29.2
+  },
+  {
+   "kind": "style",
+   "id": "monochrome_focus",
+   "page": 15,
+   "timestamp": 31.2
+  },
+  {
+   "kind": "component",
+   "id": "title",
+   "page": 16,
+   "timestamp": 33.2
+  },
+  {
+   "kind": "component",
+   "id": "quote",
+   "page": 17,
+   "timestamp": 35.2
+  },
+  {
+   "kind": "component",
+   "id": "statistic",
+   "page": 18,
+   "timestamp": 37.2
+  },
+  {
+   "kind": "component",
+   "id": "chapter",
+   "page": 19,
+   "timestamp": 39.2
+  },
+  {
+   "kind": "component",
+   "id": "source_card",
+   "page": 20,
+   "timestamp": 41.2
+  },
+  {
+   "kind": "component",
+   "id": "two_column",
+   "page": 21,
+   "timestamp": 43.2
+  },
+  {
+   "kind": "component",
+   "id": "steps",
+   "page": 22,
+   "timestamp": 45.2
+  },
+  {
+   "kind": "component",
+   "id": "lower_third",
+   "page": 23,
+   "timestamp": 47.2
+  },
+  {
+   "kind": "component",
+   "id": "keyword",
+   "page": 24,
+   "timestamp": 49.2
+  },
+  {
+   "kind": "component",
+   "id": "end_card",
+   "page": 25,
+   "timestamp": 51.2
+  },
+  {
+   "kind": "pattern",
+   "id": "grid",
+   "page": 26,
+   "timestamp": 53.2
+  },
+  {
+   "kind": "pattern",
+   "id": "dots",
+   "page": 26,
+   "timestamp": 53.2
+  },
+  {
+   "kind": "pattern",
+   "id": "stripes",
+   "page": 26,
+   "timestamp": 53.2
+  },
+  {
+   "kind": "pattern",
+   "id": "diagonal",
+   "page": 26,
+   "timestamp": 53.2
+  },
+  {
+   "kind": "pattern",
+   "id": "checker",
+   "page": 26,
+   "timestamp": 53.2
+  },
+  {
+   "kind": "pattern",
+   "id": "crosshatch",
+   "page": 26,
+   "timestamp": 53.2
+  },
+  {
+   "kind": "pattern",
+   "id": "hexagons",
+   "page": 27,
+   "timestamp": 55.2
+  },
+  {
+   "kind": "pattern",
+   "id": "rings",
+   "page": 27,
+   "timestamp": 55.2
+  },
+  {
+   "kind": "pattern",
+   "id": "waves",
+   "page": 27,
+   "timestamp": 55.2
+  },
+  {
+   "kind": "pattern",
+   "id": "contour",
+   "page": 27,
+   "timestamp": 55.2
+  },
+  {
+   "kind": "pattern",
+   "id": "speckles",
+   "page": 27,
+   "timestamp": 55.2
+  },
+  {
+   "kind": "pattern",
+   "id": "gradient",
+   "page": 27,
+   "timestamp": 55.2
+  },
+  {
+   "kind": "icon",
+   "id": "play",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "pause",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "check",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "close",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "arrow_right",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "arrow_up",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "info",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "question",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "lightbulb",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "book",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "eye",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "camera",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "mic",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "clock",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "link",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "chart",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "code",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "location",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "star",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "heart",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "volume",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "search",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "target",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "icon",
+   "id": "spark",
+   "page": 28,
+   "timestamp": 57.2
+  },
+  {
+   "kind": "effect",
+   "id": "word_reveal",
+   "page": 29,
+   "timestamp": 59.2
+  },
+  {
+   "kind": "effect",
+   "id": "line_reveal",
+   "page": 29,
+   "timestamp": 59.2
+  },
+  {
+   "kind": "effect",
+   "id": "character_reveal",
+   "page": 29,
+   "timestamp": 59.2
+  },
+  {
+   "kind": "effect",
+   "id": "text_gradient",
+   "page": 29,
+   "timestamp": 59.2
+  },
+  {
+   "kind": "effect",
+   "id": "underline_draw",
+   "page": 29,
+   "timestamp": 59.2
+  },
+  {
+   "kind": "effect",
+   "id": "radial_glow",
+   "page": 29,
+   "timestamp": 59.2
+  },
+  {
+   "kind": "effect",
+   "id": "edge_feather",
+   "page": 29,
+   "timestamp": 59.2
+  }
+ ],
+ "previews": {
+  "font/bevietnampro": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-bevietnampro.jpg"
+  },
+  "font/notosans": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-notosans.jpg"
+  },
+  "font/notoserif": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-notoserif.jpg"
+  },
+  "font/manrope": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-manrope.jpg"
+  },
+  "font/archivo": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-archivo.jpg"
+  },
+  "font/oswald": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-oswald.jpg"
+  },
+  "font/bitter": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-bitter.jpg"
+  },
+  "font/lora": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-lora.jpg"
+  },
+  "font/ibmplexmono": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-ibmplexmono.jpg"
+  },
+  "font/comfortaa": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-comfortaa.jpg"
+  },
+  "font/robotoslab": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-robotoslab.jpg"
+  },
+  "font/inter": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-inter.jpg"
+  },
+  "font/sourcesans3": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-sourcesans3.jpg"
+  },
+  "font/vollkorn": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-vollkorn.jpg"
+  },
+  "font/lexend": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-lexend.jpg"
+  },
+  "font/montserrat": {
+   "method": "FreeType actual bundled font, normal weight400",
+   "path": "assets/previews/design/font-montserrat.jpg"
+  },
+  "palette/forest": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-forest.jpg"
+  },
+  "palette/ink_gold": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-ink_gold.jpg"
+  },
+  "palette/paper": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-paper.jpg"
+  },
+  "palette/science": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-science.jpg"
+  },
+  "palette/studio_white": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-studio_white.jpg"
+  },
+  "palette/berry": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-berry.jpg"
+  },
+  "palette/electric": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-electric.jpg"
+  },
+  "palette/ocean": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-ocean.jpg"
+  },
+  "palette/terracotta": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-terracotta.jpg"
+  },
+  "palette/slate": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-slate.jpg"
+  },
+  "palette/citrus": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-citrus.jpg"
+  },
+  "palette/rose": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-rose.jpg"
+  },
+  "palette/noir": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-noir.jpg"
+  },
+  "palette/indigo": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-indigo.jpg"
+  },
+  "palette/sage": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-sage.jpg"
+  },
+  "palette/crimson": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-crimson.jpg"
+  },
+  "palette/blueprint": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-blueprint.jpg"
+  },
+  "palette/sand": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-sand.jpg"
+  },
+  "palette/lavender": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-lavender.jpg"
+  },
+  "palette/amber": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-amber.jpg"
+  },
+  "palette/arctic": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-arctic.jpg"
+  },
+  "palette/magenta": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-magenta.jpg"
+  },
+  "palette/moss": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-moss.jpg"
+  },
+  "palette/cobalt": {
+   "method": "Opaque sRGB swatches with actual bundled font",
+   "path": "assets/previews/design/palette-cobalt.jpg"
+  },
+  "style/vietnam_knowledge": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 1.2,
+   "path": "assets/previews/design/remotion-page-00.jpg"
+  },
+  "style/documentary": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 3.2,
+   "path": "assets/previews/design/remotion-page-01.jpg"
+  },
+  "style/editorial_paper": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 5.2,
+   "path": "assets/previews/design/remotion-page-02.jpg"
+  },
+  "style/science_lab": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 7.2,
+   "path": "assets/previews/design/remotion-page-03.jpg"
+  },
+  "style/minimal_explainer": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 9.2,
+   "path": "assets/previews/design/remotion-page-04.jpg"
+  },
+  "style/short_bold": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 11.2,
+   "path": "assets/previews/design/remotion-page-05.jpg"
+  },
+  "style/culture_story": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 13.2,
+   "path": "assets/previews/design/remotion-page-06.jpg"
+  },
+  "style/friendly_learning": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 15.2,
+   "path": "assets/previews/design/remotion-page-07.jpg"
+  },
+  "style/technical_blueprint": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 17.2,
+   "path": "assets/previews/design/remotion-page-08.jpg"
+  },
+  "style/data_report": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 19.2,
+   "path": "assets/previews/design/remotion-page-09.jpg"
+  },
+  "style/ocean_calm": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 21.2,
+   "path": "assets/previews/design/remotion-page-10.jpg"
+  },
+  "style/creative_essay": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 23.2,
+   "path": "assets/previews/design/remotion-page-11.jpg"
+  },
+  "style/history_archive": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 25.2,
+   "path": "assets/previews/design/remotion-page-12.jpg"
+  },
+  "style/bright_education": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 27.2,
+   "path": "assets/previews/design/remotion-page-13.jpg"
+  },
+  "style/nature_field": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 29.2,
+   "path": "assets/previews/design/remotion-page-14.jpg"
+  },
+  "style/monochrome_focus": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 31.2,
+   "path": "assets/previews/design/remotion-page-15.jpg"
+  },
+  "component/title": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 33.2,
+   "path": "assets/previews/design/remotion-page-16.jpg"
+  },
+  "component/quote": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 35.2,
+   "path": "assets/previews/design/remotion-page-17.jpg"
+  },
+  "component/statistic": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 37.2,
+   "path": "assets/previews/design/remotion-page-18.jpg"
+  },
+  "component/chapter": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 39.2,
+   "path": "assets/previews/design/remotion-page-19.jpg"
+  },
+  "component/source_card": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 41.2,
+   "path": "assets/previews/design/remotion-page-20.jpg"
+  },
+  "component/two_column": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 43.2,
+   "path": "assets/previews/design/remotion-page-21.jpg"
+  },
+  "component/steps": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 45.2,
+   "path": "assets/previews/design/remotion-page-22.jpg"
+  },
+  "component/lower_third": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 47.2,
+   "path": "assets/previews/design/remotion-page-23.jpg"
+  },
+  "component/keyword": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 49.2,
+   "path": "assets/previews/design/remotion-page-24.jpg"
+  },
+  "component/end_card": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 51.2,
+   "path": "assets/previews/design/remotion-page-25.jpg"
+  },
+  "pattern/grid": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 53.2,
+   "path": "assets/previews/design/remotion-page-26.jpg"
+  },
+  "pattern/dots": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 53.2,
+   "path": "assets/previews/design/remotion-page-26.jpg"
+  },
+  "pattern/stripes": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 53.2,
+   "path": "assets/previews/design/remotion-page-26.jpg"
+  },
+  "pattern/diagonal": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 53.2,
+   "path": "assets/previews/design/remotion-page-26.jpg"
+  },
+  "pattern/checker": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 53.2,
+   "path": "assets/previews/design/remotion-page-26.jpg"
+  },
+  "pattern/crosshatch": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 53.2,
+   "path": "assets/previews/design/remotion-page-26.jpg"
+  },
+  "pattern/hexagons": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 55.2,
+   "path": "assets/previews/design/remotion-page-27.jpg"
+  },
+  "pattern/rings": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 55.2,
+   "path": "assets/previews/design/remotion-page-27.jpg"
+  },
+  "pattern/waves": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 55.2,
+   "path": "assets/previews/design/remotion-page-27.jpg"
+  },
+  "pattern/contour": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 55.2,
+   "path": "assets/previews/design/remotion-page-27.jpg"
+  },
+  "pattern/speckles": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 55.2,
+   "path": "assets/previews/design/remotion-page-27.jpg"
+  },
+  "pattern/gradient": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 55.2,
+   "path": "assets/previews/design/remotion-page-27.jpg"
+  },
+  "icon/play": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/pause": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/check": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/close": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/arrow_right": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/arrow_up": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/info": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/question": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/lightbulb": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/book": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/eye": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/camera": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/mic": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/clock": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/link": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/chart": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/code": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/location": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/star": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/heart": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/volume": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/search": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/target": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "icon/spark": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 57.2,
+   "path": "assets/previews/design/remotion-page-28.jpg"
+  },
+  "effect/word_reveal": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 59.2,
+   "path": "assets/previews/design/remotion-page-29.jpg"
+  },
+  "effect/line_reveal": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 59.2,
+   "path": "assets/previews/design/remotion-page-29.jpg"
+  },
+  "effect/character_reveal": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 59.2,
+   "path": "assets/previews/design/remotion-page-29.jpg"
+  },
+  "effect/text_gradient": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 59.2,
+   "path": "assets/previews/design/remotion-page-29.jpg"
+  },
+  "effect/underline_draw": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 59.2,
+   "path": "assets/previews/design/remotion-page-29.jpg"
+  },
+  "effect/radial_glow": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 59.2,
+   "path": "assets/previews/design/remotion-page-29.jpg"
+  },
+  "effect/edge_feather": {
+   "method": "Actual rendered Remotion frame",
+   "timestamp": 59.2,
+   "path": "assets/previews/design/remotion-page-29.jpg"
+  }
+ },
+ "scope": "Silent visual dictionary, not a narrated film. Font/swatch PNGs FreeType; all composition pages actually rendered. Sources editable, no generated semantic/aesthetic score."
+}

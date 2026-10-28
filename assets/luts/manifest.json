@@ -1,0 +1,68 @@
+{
+  "luts": [
+    {
+      "id": "identity",
+      "description": "No creative change / technical identity",
+      "file": "identity.cube",
+      "sha256": "bcfc623ea0a5c7c618265474cd6a78618ca0e33981920cbbb1a471c9eca40e0f",
+      "size": 17,
+      "domain": "normalized display-referred BT.709 RGB; not scene-linear/HDR",
+      "origin": "Original procedural EditVideo transform; no third-party look pack"
+    },
+    {
+      "id": "documentary",
+      "description": "Soft documentary contrast, restrained saturation",
+      "file": "documentary.cube",
+      "sha256": "ed22dd470b43616a0241a289f79018663faf8c05c01fb61954b1560e89a5aadb",
+      "size": 17,
+      "domain": "normalized display-referred BT.709 RGB; not scene-linear/HDR",
+      "origin": "Original procedural EditVideo transform; no third-party look pack"
+    },
+    {
+      "id": "warm_story",
+      "description": "Warm narrative illustration; inspect skin and neutral highlights",
+      "file": "warm_story.cube",
+      "sha256": "d6d1d9f5b7a5a1924a9aa87777b2180dbc6533eb60f313e9bb885b7969e09360",
+      "size": 17,
+      "domain": "normalized display-referred BT.709 RGB; not scene-linear/HDR",
+      "origin": "Original procedural EditVideo transform; no third-party look pack"
+    },
+    {
+      "id": "cool_science",
+      "description": "Cool restrained graphic/illustration",
+      "file": "cool_science.cube",
+      "sha256": "dce15fd69bc69497832b7794e8579c96faac07f05b7e0e2c27299bb9f5c238f7",
+      "size": 17,
+      "domain": "normalized display-referred BT.709 RGB; not scene-linear/HDR",
+      "origin": "Original procedural EditVideo transform; no third-party look pack"
+    },
+    {
+      "id": "forest",
+      "description": "Restrained natural green illustration",
+      "file": "forest.cube",
+      "sha256": "1b6adc9f979b87836751686b8f9634482e51553d992e77ed32c3ff8417e31491",
+      "size": 17,
+      "domain": "normalized display-referred BT.709 RGB; not scene-linear/HDR",
+      "origin": "Original procedural EditVideo transform; no third-party look pack"
+    },
+    {
+      "id": "monochrome",
+      "description": "Luminance-based monochrome, not evidence color matching",
+      "file": "monochrome.cube",
+      "sha256": "bef2d714b42bd773c8aca819bdd02217fe16a0adfdc7e88bb405a2c9ae31c400",
+      "size": 17,
+      "domain": "normalized display-referred BT.709 RGB; not scene-linear/HDR",
+      "origin": "Original procedural EditVideo transform; no third-party look pack"
+    },
+    {
+      "id": "print_film_cineon",
+      "description": "Print-film emulation: S-curve, dense blacks, highlight saturation roll-off, cool/warm crossover",
+      "file": "print_film_cineon.cube",
+      "sha256": "75e6791e01d27340b54b756f200a72d44afd033db66af1c9064f5c2d64540cd3",
+      "size": 33,
+      "input": "cineon",
+      "domain": "Cineon log (printing density) in → display BT.709 out; use as a colour-graph look with input cineon",
+      "origin": "Original procedural EditVideo transform; no third-party look pack"
+    }
+  ]
+}

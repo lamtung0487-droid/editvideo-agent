@@ -1,0 +1,6 @@
+# Period maps and better elevation (editvideo.period_maps, terrain.elevation source="cop30"):
+# Copernicus GLO-30 GeoTIFFs, USGS TerraGo GeoPDFs of AMS sheets, and the Indian 1960 -> WGS 84 datum shift.
+tifffile==2026.3.3
+imagecodecs==2026.3.6
+pymupdf==2.0
+pyproj==3.7.2

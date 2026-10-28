@@ -1,0 +1,8 @@
+EditVideo Agent
+Copyright 2026 the EditVideo Agent authors
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This project builds on, bundles or downloads third-party components (rendering engines, fonts, icons, models, data)
+that keep their own licences. They are listed in THIRD_PARTY_NOTICES.md. Remotion, used to render, is not open source:
+larger for-profit organisations need a Remotion company licence. ProPainter (optional) is non-commercial.

@@ -1,0 +1,60 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.benchmarks/
+*.egg-info/
+build/
+dist/
+
+# Node / engines
+node_modules/
+.remotion/
+engines/NVIDIA Corporation/
+
+# Runtime state, user media, study downloads, renders (publish chosen renders as release assets)
+data/
+outputs/
+# a lab copy of study data for learning-module experiments (local only)
+data-learning-lab/
+*.log
+
+# Local configuration and secrets (.mcp.json is written by setup from .mcp.example.json)
+.env
+.env.*
+.mcp.json
+.claude/settings.local.json
+
+# Owner's private planning documents
+spec-extracted.txt
+Bao_cao_*.docx
+~$*
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+# learnkit's default store when no host configures one
+learnkit-data/
+
+# agent worktrees
+.claude/worktrees/
+
+# media and model files are never committed, except the public-domain demo previews
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.wav
+*.mp3
+*.flac
+*.ckpt
+*.pt
+*.safetensors
+*.onnx
+!docs/demo/*.mp4
+
+# deep-research working folders (the report and notes are kept in docs/research)
+/research_notes/
+/reports/

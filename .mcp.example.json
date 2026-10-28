@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "editvideo": {
+      "type": "stdio",
+      "command": "<repo>/.venv/Scripts/python.exe",
+      "args": ["<repo>/run.py"],
+      "env": {"PYTHONIOENCODING": "utf-8"}
+    }
+  }
+}

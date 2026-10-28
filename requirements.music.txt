@@ -1,0 +1,9 @@
+# Beat This! beats and downbeats (MIT code and weights; editvideo.music falls back to its DP tracker without it).
+# Install after requirements.vision.txt (CUDA torch is configured there), with --no-deps so torch stays as it is:
+#   pip install --no-deps -r requirements.music.txt
+# The checkpoint (final0.ckpt) is fetched into the store's models/beat_this on first use, or set EDITVIDEO_BEAT_CHECKPOINT.
+--extra-index-url https://download.pytorch.org/whl/cu124
+torchaudio==2.6.0+cu124
+rotary-embedding-torch==0.9.1
+soxr==1.1.0
+beat-this @ https://github.com/CPJKU/beat_this/archive/b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c.zip
